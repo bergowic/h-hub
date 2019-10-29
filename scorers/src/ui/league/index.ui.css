@@ -1,0 +1,8 @@
+.league th {
+	color: gray;
+}
+
+.league th.sortable {
+	cursor: pointer;
+	color: black;
+}

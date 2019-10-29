@@ -1,0 +1,7 @@
+{
+	"league-parse-queue-name": "h-hub_league-parse-trigger",
+	"league-generate-queue-name": "h-hub_league-generate-trigger",
+	"game-parse-queue-name": "h-hub_game-parse-trigger",
+	"game-table-name": "h-hub_games",
+	"bucket-name": "xn--hvr-torschtzen-psb.monsul.de"
+}

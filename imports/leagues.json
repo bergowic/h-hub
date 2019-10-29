@@ -1,0 +1,157 @@
+[
+	{
+		"_id": 1,
+		"name": "M-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44371&nm=14&all=1"
+	},
+	{
+		"_id": 2,
+		"name": "M-VL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44366&nm=14&all=1"
+	},
+	{
+		"_id": 3,
+		"name": "M-KL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44361&nm=14&all=1"
+	},
+	{
+		"_id": 4,
+		"name": "M-AK",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44356&nm=14&all=1"
+	},
+	{
+		"_id": 5,
+		"name": "M-BL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44351&nm=14&all=1"
+	},
+	{
+		"_id": 6,
+		"name": "F-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44376&nm=14&all=1"
+	},
+	{
+		"_id": 7,
+		"name": "F-KL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44381&nm=14&all=1"
+	},
+	{
+		"_id": 8,
+		"name": "F-AK",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44386&nm=14&all=1"
+	},
+	{
+		"_id": 9,
+		"name": "mJA-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45641&nm=14&all=1"
+	},
+	{
+		"_id": 10,
+		"name": "mJB-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45646&nm=14&all=1"
+	},
+	{
+		"_id": 11,
+		"name": "mJB-KK",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45651&nm=14&all=1"
+	},
+	{
+		"_id": 12,
+		"name": "mJC-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45656&nm=14&all=1"
+	},
+	{
+		"_id": 13,
+		"name": "mJC-KK-1",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45661&nm=14&all=1"
+	},
+	{
+		"_id": 14,
+		"name": "mJC-KK-2",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45666&nm=14&all=1"
+	},
+	{
+		"_id": 15,
+		"name": "mJD-KK-1",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=47861&nm=14&all=1"
+	},
+	{
+		"_id": 16,
+		"name": "mJD-KK-2",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=47866&nm=14&all=1"
+	},
+	{
+		"_id": 17,
+		"name": "mJD-KK-3",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=47871&nm=14&all=1"
+	},
+	{
+		"_id": 18,
+		"name": "wJB-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45686&nm=14&all=1"
+	},
+	{
+		"_id": 19,
+		"name": "wJC-RHL",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=45691&nm=14&all=1"
+	},
+	{
+		"_id": 20,
+		"name": "wJD-KK-1",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=47456&nm=14&all=1"
+	},
+	{
+		"_id": 21,
+		"name": "wJD-KK-2",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=47461&nm=14&all=1"
+	},
+	{
+		"_id": 22,
+		"name": "M-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44241&nm=14&all=1"
+	},
+	{
+		"_id": 23,
+		"name": "F-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44246&nm=14&all=1"
+	},
+	{
+		"_id": 24,
+		"name": "mJA-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44486&nm=14&all=1"
+	},
+	{
+		"_id": 25,
+		"name": "wJA-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44491&nm=14&all=1"
+	},
+	{
+		"_id": 26,
+		"name": "mJB-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44496&nm=14&all=1"
+	},
+	{
+		"_id": 27,
+		"name": "wJB-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44501&nm=14&all=1"
+	},
+	{
+		"_id": 28,
+		"name": "mJC-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44506&nm=14&all=1"
+	},
+	{
+		"_id": 29,
+		"name": "wJC-OLRPS",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=44511&nm=14&all=1"
+	},
+	{
+		"_id": 30,
+		"name": "mJC-WLT",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=54306&nm=14&all=1"
+	},
+	{
+		"_id": 31,
+		"name": "wJC-WLT",
+		"url": "http://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=83&score=54311&nm=14&all=1"
+	}
+]

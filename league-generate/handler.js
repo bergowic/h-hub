@@ -28,7 +28,8 @@ module.exports.generateLeague = (event, context, cb) => {
 				Bucket: process.env.BUCKET_NAME,
 				Key: 'assets/league-' + league._id + '.json',
 				Body: JSON.stringify(games),
-				ContentType: 'application/json'
+				ContentType: 'application/json',
+				CacheControl: 'no-cache',
 			}, cb);
 		}
 	});

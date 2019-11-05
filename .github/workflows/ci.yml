@@ -16,7 +16,7 @@ jobs:
     - name: Build
       run: |
         ci/install.sh
-        npm install -g serverless:1.55.1
+        npm install -g serverless@1.55.1
         ci/deploy.sh
       env:
         CI: true

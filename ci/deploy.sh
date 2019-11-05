@@ -1,10 +1,10 @@
 cd game-parser
-sls deploy --aws-profile lukas
+sls deploy
 cd ../league-generate
-sls deploy --aws-profile lukas
+sls deploy
 cd ../league-generate-trigger
-sls deploy --aws-profile lukas
+sls deploy
 cd ../league-parser
-sls deploy --aws-profile lukas
+sls deploy
 cd ../league-parser-trigger
-sls deploy --aws-profile lukas
+sls deploy

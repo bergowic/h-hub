@@ -8,3 +8,5 @@ cd ../league-parser
 sls deploy
 cd ../league-parser-trigger
 sls deploy
+aws s3 rm s3://${{ secrets.AWS_S3_BUCKET }} --recursive --exclude assets/*
+aws s3 cp scorers/build s3://${{ secrets.AWS_S3_BUCKET }} --acl public-read --recursive --exclude assets/*

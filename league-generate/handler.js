@@ -24,6 +24,8 @@ module.exports.generateLeague = (event, context, cb) => {
 		} else {
 			const games = data.Items.map((game) => AWS.DynamoDB.Converter.unmarshall(game));
 
+			games.forEach(game => console.log(game));
+
 			s3.putObject({
 				Bucket: process.env.BUCKET_NAME,
 				Key: 'assets/league-' + league._id + '.json',

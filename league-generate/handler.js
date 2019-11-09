@@ -24,7 +24,7 @@ module.exports.generateLeague = (event, context, cb) => {
 
 	let games = [];
 
-	onScan(err, data) {
+	function onScan(err, data) {
 		if (err) {
 			cb(err);
 		} else {

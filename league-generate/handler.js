@@ -32,7 +32,7 @@ module.exports.generateLeague = (event, context, cb) => {
 
 			if (data.LastEvaluatedKey) {
 				params.ExclusiveStartKey = data.LastEvaluatedKey;
-				dynamoDb.scan(params, onScan;
+				dynamoDb.scan(params, onScan);
 			} else {
 				s3.putObject({
 					Bucket: process.env.BUCKET_NAME,
@@ -45,5 +45,5 @@ module.exports.generateLeague = (event, context, cb) => {
 		}
 	}
 
-	dynamoDb.scan(params, onScan;
+	dynamoDb.scan(params, onScan);
 };

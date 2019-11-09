@@ -22,6 +22,7 @@ module.exports.generateLeague = (event, context, cb) => {
 		if (err) {
 			cb(err);
 		} else {
+			console.log('LastEvaluatedKey', data.LastEvaluatedKey);
 			const games = data.Items.map((game) => AWS.DynamoDB.Converter.unmarshall(game));
 
 			games.forEach((game, i) => console.log(i, JSON.stringify(game)));

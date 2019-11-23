@@ -3,7 +3,7 @@
 const AWS = require('aws-sdk');
 const util = require('util');
 
-const getGames = require('./parser');
+const { getGames } = require('./parser');
 
 const sqs = new AWS.SQS();
 

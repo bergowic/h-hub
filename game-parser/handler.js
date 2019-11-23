@@ -35,35 +35,26 @@ module.exports.parseGame = (event, context, cb) => {
 	console.log('league', league);
 	console.log('game', game);
 
-	request(game.url, (err, response, buffer) => {
-		if (err) {
-			cb(err)
-		} else {
-			getGameResults(game.url).then((results) => {
-				game.leagueId = league._id;
-				game.home = results.home.name;
-				game.guest = results.guest.name;
-				game.results = {
-					home: {
-						players: results.home.players
-					},
-					guest: {
-						players: results.guest.players
-					}
-				};
-				game._id = sha1(league._id + '-' + game.home + '-' + game.guest);
+	getGameResults(game.report.url).then((results) => {
+		game.results = {
+			home: {
+				players: results.home.players
+			},
+			guest: {
+				players: results.guest.players
+			}
+		};
+		game._id = sha1(league._id + '-' + game.home + '-' + game.guest);
 
-				console.log('results', JSON.stringify(game));
+		console.log('results', JSON.stringify(game));
 
-				const params = {
-					Item: AWS.DynamoDB.Converter.marshall(game),
-					TableName: process.env.TABLE_NAME
-				}
-
-				dynamoDb.putItem(params, cb);
-			}, (err) => {
-				cb(err);
-			});
+		const params = {
+			Item: AWS.DynamoDB.Converter.marshall(game),
+			TableName: process.env.TABLE_NAME
 		}
+
+		dynamoDb.putItem(params, cb);
+	}, (err) => {
+		cb(err);
 	});
 };

@@ -11,15 +11,17 @@ const LEAGUE_URL_PATTERN = 'https://spo.handball4all.de/service/if_g_json.php?ca
 
 function sendGame(queueUrl, league, game) {
 	return new Promise((success, fail) => {
+		game.leagueId = league._id;
+
 		const body = {
 			league: league,
-			game: game.report.url
+			game: game,
 		};
 
 		const params = {
-        MessageBody: JSON.stringify(body),
-        QueueUrl: queueUrl
-    };
+			MessageBody: JSON.stringify(body),
+			QueueUrl: queueUrl
+		};
 
 		return sqs.sendMessage(params).promise();
 	});

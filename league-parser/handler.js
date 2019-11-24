@@ -15,26 +15,29 @@ async function sendGame(queueUrl, league, game) {
 			} else {
 				const oldGame = AWS.DynamoDB.Converter.unmarshall(data.Item);
 
-				console.log('game', game, oldGame);
-				game.leagueId = league._id;
+				if (oldGame.results) {
+					success();
+				} else {
+					console.log('game', game, oldGame);
+					game.leagueId = league._id;
 
-				const body = {
-					league: league,
-					game: game,
-				};
-		
-				const params = {
-					MessageBody: JSON.stringify(body),
-					QueueUrl: queueUrl
-				};
-		
-				sqs.sendMessage(params, (err, res) => {
-					if (err) {
-						fail(err);
-					} else {
-						success(res);
-					}
-				});
+					const body = {
+						league: league,
+						game: game,
+					};
+			
+					const params = {
+						MessageBody: JSON.stringify(body),
+						QueueUrl: queueUrl
+					};
+			
+					sqs.sendMessage(params, (err, res) => {
+						if (err) {
+							fail(err);
+						} else {
+							success(res);
+						}
+					});
 			}
 		});
 	});

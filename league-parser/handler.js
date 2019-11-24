@@ -38,6 +38,7 @@ async function sendGame(queueUrl, league, game) {
 							success(res);
 						}
 					});
+				}
 			}
 		});
 	});

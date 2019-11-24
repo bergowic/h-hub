@@ -158,6 +158,8 @@ class League extends React.Component {
 								{name: 'Tore', sort: 'goals'},
 								{name: 'Spiele', sort: 'games'},
 								{name: 'Tore / Spiel', sort: 'goalsPerGame'},
+								{name: 'Feldtore', sort: 'goalsField'},
+								{name: 'Feldtore / Spiel', sort: 'goalsFieldPerGame'},
 								{name: '7m - Tore', sort: 'goals7m'},
 								{name: '7m - Versuche', sort: 'attempts7m'},
 								{name: '7m - Quote', sort: 'quote7m'},
@@ -170,7 +172,9 @@ class League extends React.Component {
 							return {
 								...player,
 								goalsPerGame: Math.round((player.goals / player.games) * 100) / 100,
-								quote7m: player.attempts7m > 0 ? Math.round((player.goals7m / player.attempts7m) * 100) : -1
+								goalsField: player.goals - player.goals7m,
+								goalsFieldPerGame: Math.round(((player.goals - player.goals7m) / player.games) * 100) / 100,
+								quote7m: player.attempts7m > 0 ? Math.round((player.goals7m / player.attempts7m) * 100) : -1,
 							}
 						}).sort((p1, p2) => {
 							const sort = this.state.sort;
@@ -188,6 +192,8 @@ class League extends React.Component {
 									<td>{player.goals}</td>
 									<td>{player.games}</td>
 									<td>{player.goalsPerGame}</td>
+									<td>{player.goalsField}</td>
+									<td>{player.goalsFieldPerGame}</td>
 									<td>{player.goals7m}</td>
 									<td>{player.attempts7m}</td>
 									<td>{player.quote7m < 0 ? '-' : player.quote7m + '%'}</td>

@@ -15,11 +15,10 @@ async function sendGame(queueUrl, league, game) {
 			} else {
 				const oldGame = AWS.DynamoDB.Converter.unmarshall(data.Item);
 
-				if (oldGame.results) {
+				if (oldGame && oldGame.results) {
 					success();
 				} else {
 					console.log('game', game, oldGame);
-					game.leagueId = league._id;
 
 					const body = {
 						league: league,

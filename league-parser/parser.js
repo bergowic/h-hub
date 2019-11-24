@@ -10,8 +10,9 @@ const REPORT_URL_BASE = 'http://spo.handball4all.de/misc/sboPublicReports.php?sG
 
 function getGame(league, rawGame) {
     const game = {
-        _id: sha1(league._id + '-' + rawGame.home + '-' + rawGame.guest),
+        _id: sha1(league._id + '-' + rawGame.gHomeTeam + '-' + rawGame.gGuestTeam),
         gameId: rawGame.gID,
+        leagueId: league._id,
         home: rawGame.gHomeTeam,
         guest: rawGame.gGuestTeam,
         time: moment(rawGame.gDate + ' ' + rawGame.gTime, 'DD.MM.YY HH:mm', 'Europe/Berlin').toDate(),

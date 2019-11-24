@@ -1,15 +1,14 @@
 'use strict';
 
 const AWS = require('aws-sdk');
-const util = require('util');
 
 const { getGames } = require('./parser');
 
 const sqs = new AWS.SQS();
+const dynamoDb = new AWS.DynamoDB();
 
-const LEAGUE_URL_PATTERN = 'https://spo.handball4all.de/service/if_g_json.php?ca=1&cl=%d&cmd=ps&og=%s'
-
-function sendGame(queueUrl, league, game) {
+function sendGame(queueUrl, league, game, oldGame) {
+	console.log('game', game, oldGame);
 	return new Promise((success, fail) => {
 		game.leagueId = league._id;
 
@@ -27,11 +26,19 @@ function sendGame(queueUrl, league, game) {
 	});
 }
 
-function getLeagueUrl(league) {
-	return util.format(LEAGUE_URL_PATTERN, league.score, league.group);
+async function getGame(game) {
+	const key = {
+		_id: game._id
+	}
+	const params = {
+		Key: AWS.DynamoDB.Converter.marshall(key),
+		TableName: process.env.TABLE_NAME,
+	};
+
+	return dynamodb.getItem(params);
 }
 
-module.exports.parseLeague = (event, context, cb) => {
+module.exports.parseLeague = async (event, context, cb) => {
 	const accountId = context.invokedFunctionArn.split(":")[4];
 	const queueUrl = 'https://sqs.eu-central-1.amazonaws.com/' + accountId + '/' + process.env.QUEUE_NAME;
 
@@ -42,7 +49,7 @@ module.exports.parseLeague = (event, context, cb) => {
 	getGames(getLeagueUrl(league)).then((games) => {
 		return Promise.all(games
 			.filter(game => game.report)
-			.map(game => sendGame(queueUrl, league, game))
+			.map(game => sendGame(queueUrl, league, game, await getGame(game)))
 		)
 	}).then(cb);
 };

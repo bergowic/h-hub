@@ -4,7 +4,6 @@ const AWS = require('aws-sdk');
 const request = require('request');
 const PDFParser = require('pdf2json');
 const gameParser = require('./parser');
-const sha1 = require('sha1');
 
 const dynamoDb = new AWS.DynamoDB();
 
@@ -44,7 +43,6 @@ module.exports.parseGame = (event, context, cb) => {
 				players: results.guest.players
 			}
 		};
-		game._id = sha1(league._id + '-' + game.home + '-' + game.guest);
 
 		console.log('results', JSON.stringify(game));
 

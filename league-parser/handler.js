@@ -7,7 +7,8 @@ const { getGames } = require('./parser');
 const sqs = new AWS.SQS();
 const dynamoDb = new AWS.DynamoDB();
 
-function sendGame(queueUrl, league, game, oldGame) {
+async function sendGame(queueUrl, league, game) {
+	const oldGame = await getGame(game);
 	console.log('game', game, oldGame);
 	return new Promise((success, fail) => {
 		game.leagueId = league._id;
@@ -29,7 +30,7 @@ function sendGame(queueUrl, league, game, oldGame) {
 async function getGame(game) {
 	const key = {
 		_id: game._id
-	}
+	};
 	const params = {
 		Key: AWS.DynamoDB.Converter.marshall(key),
 		TableName: process.env.TABLE_NAME,
@@ -38,7 +39,7 @@ async function getGame(game) {
 	return dynamodb.getItem(params);
 }
 
-module.exports.parseLeague = async (event, context, cb) => {
+module.exports.parseLeague = (event, context, cb) => {
 	const accountId = context.invokedFunctionArn.split(":")[4];
 	const queueUrl = 'https://sqs.eu-central-1.amazonaws.com/' + accountId + '/' + process.env.QUEUE_NAME;
 
@@ -49,7 +50,7 @@ module.exports.parseLeague = async (event, context, cb) => {
 	getGames(getLeagueUrl(league)).then((games) => {
 		return Promise.all(games
 			.filter(game => game.report)
-			.map(game => sendGame(queueUrl, league, game, await getGame(game)))
+			.map(game => sendGame(queueUrl, league, game))
 		)
 	}).then(cb);
 };

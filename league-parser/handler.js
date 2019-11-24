@@ -47,7 +47,7 @@ module.exports.parseLeague = (event, context, cb) => {
 
 	console.log('league', league);
 
-	getGames(getLeagueUrl(league)).then((games) => {
+	getGames(league).then((games) => {
 		return Promise.all(games
 			.filter(game => game.report)
 			.map(game => sendGame(queueUrl, league, game))

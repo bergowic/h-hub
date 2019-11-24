@@ -37,7 +37,7 @@ function getLeagueUrl(league) {
 	return util.format(LEAGUE_URL_PATTERN, league.score, league.group);
 }
 
-module.exports.getGames = async (league) => {
+module.exports.getGames = (league) => {
     return new Promise((resolve, reject) => {
         request(getLeagueUrl(league), (err, response, buffer) => {
             if (err) {

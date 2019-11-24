@@ -6,3 +6,7 @@
 	cursor: pointer;
 	color: black;
 }
+
+.league tbody tr {
+	cursor: pointer;
+}

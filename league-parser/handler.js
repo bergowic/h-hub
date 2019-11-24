@@ -11,7 +11,7 @@ async function sendGame(queueUrl, league, game) {
 	return new Promise((success, fail) => {
 		getGame(game, (err, data) => {
 			if (err) {
-				cb(err);
+				fail(err);
 			} else {
 				const oldGame = AWS.DynamoDB.Converter.unmarshall(data.Item);
 
@@ -28,13 +28,19 @@ async function sendGame(queueUrl, league, game) {
 					QueueUrl: queueUrl
 				};
 		
-				return sqs.sendMessage(params, cb);
+				return sqs.sendMessage(params, (err, res) => {
+					if (err) {
+						fail(err);
+					} else {
+						success(res);
+					}
+				});
 			}
 		});
 	});
 }
 
-async function getGame(game) {
+function getGame(game, cb) {
 	const key = {
 		_id: game._id
 	};
@@ -43,7 +49,7 @@ async function getGame(game) {
 		TableName: process.env.TABLE_NAME,
 	};
 
-	return dynamoDb.getItem(params);
+	dynamoDb.getItem(params, cb);
 }
 
 module.exports.parseLeague = (event, context, cb) => {

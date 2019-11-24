@@ -28,7 +28,8 @@ async function sendGame(queueUrl, league, game) {
 					QueueUrl: queueUrl
 				};
 		
-				return sqs.sendMessage(params, (err, res) => {
+				sqs.sendMessage(params, (err, res) => {
+					console.log('send', err, res);
 					if (err) {
 						fail(err);
 					} else {

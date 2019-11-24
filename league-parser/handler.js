@@ -36,7 +36,7 @@ async function getGame(game) {
 		TableName: process.env.TABLE_NAME,
 	};
 
-	return dynamodb.getItem(params);
+	return dynamoDb.getItem(params);
 }
 
 module.exports.parseLeague = (event, context, cb) => {

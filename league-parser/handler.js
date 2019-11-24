@@ -29,7 +29,6 @@ async function sendGame(queueUrl, league, game) {
 				};
 		
 				sqs.sendMessage(params, (err, res) => {
-					console.log('send', err, res);
 					if (err) {
 						fail(err);
 					} else {
@@ -66,5 +65,9 @@ module.exports.parseLeague = (event, context, cb) => {
 			.filter(game => game.report)
 			.map(game => sendGame(queueUrl, league, game))
 		)
-	}).then(cb);
+	}).then((data) => {
+		cb(null, data);
+	}, (err) => {
+		cb(err);
+	});
 };

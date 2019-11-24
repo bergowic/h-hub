@@ -8,22 +8,29 @@ const sqs = new AWS.SQS();
 const dynamoDb = new AWS.DynamoDB();
 
 async function sendGame(queueUrl, league, game) {
-	const oldGame = await getGame(game);
-	console.log('game', game, oldGame);
 	return new Promise((success, fail) => {
-		game.leagueId = league._id;
+		getGame(game, (err, data) => {
+			if (err) {
+				cb(err);
+			} else {
+				const oldGame = AWS.DynamoDB.Converter.unmarshall(data.Item);
 
-		const body = {
-			league: league,
-			game: game,
-		};
+				console.log('game', game, oldGame);
+				game.leagueId = league._id;
 
-		const params = {
-			MessageBody: JSON.stringify(body),
-			QueueUrl: queueUrl
-		};
-
-		return sqs.sendMessage(params).promise();
+				const body = {
+					league: league,
+					game: game,
+				};
+		
+				const params = {
+					MessageBody: JSON.stringify(body),
+					QueueUrl: queueUrl
+				};
+		
+				return sqs.sendMessage(params, cb);
+			}
+		});
 	});
 }
 

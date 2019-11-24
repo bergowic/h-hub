@@ -16,10 +16,10 @@ function getGame(league, rawGame) {
         guest: rawGame.gGuestTeam,
         time: moment(rawGame.gDate + ' ' + rawGame.gTime, 'DD.MM.YY HH:mm', 'Europe/Berlin').toDate(),
         gym: {
-            name: rawGame.gGymnasiumName,
-            street: rawGame.gGymnasiumStreet,
-            zip: parseInt(rawGame.gGymnasiumPostal, 10),
-            city: rawGame.gGymnasiumTown,
+            name: rawGame.gGymnasiumName || null,
+            street: rawGame.gGymnasiumStreet || null,
+            zip: rawGame.gGymnasiumPostal ? parseInt(rawGame.gGymnasiumPostal, 10) : null,
+            city: rawGame.gGymnasiumTown || null,
         },
     }
 

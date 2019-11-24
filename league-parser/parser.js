@@ -5,12 +5,12 @@ const moment = require('moment-timezone');
 const sha1 = require('sha1');
 const util = require('util');
 
-const LEAGUE_URL_PATTERN = 'https://spo.handball4all.de/service/if_g_json.php?ca=1&cl=%d&cmd=ps&og=%s'
+const LEAGUE_URL_PATTERN = 'https://spo.handball4all.de/service/if_g_json.php?ca=1&cl=%d&cmd=ps&og=%s';
 const REPORT_URL_BASE = 'http://spo.handball4all.de/misc/sboPublicReports.php?sGID=';
 
 function getGame(league, rawGame) {
     const game = {
-        _id = sha1(league._id + '-' + rawGame.home + '-' + rawGame.guest);
+        _id: sha1(league._id + '-' + rawGame.home + '-' + rawGame.guest),
         gameId: rawGame.gID,
         home: rawGame.gHomeTeam,
         guest: rawGame.gGuestTeam,

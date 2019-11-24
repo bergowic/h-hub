@@ -1,21 +1,21 @@
 import React from 'react';
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+	BrowserRouter as Router,
 	useHistory,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
-import LeagueSelect from 'ui/league/select';
-import LeagueContainer from 'ui/league/container';
+import League from 'ui/league';
 import Footer from './footer';
+import LeagueSelect from 'ui/league/select';
 import Impressum from 'ui/impressum';
+
+import { useQuery } from '../../utils/url';
 
 function BackButton() {
 	let history = useHistory()
@@ -25,37 +25,65 @@ function BackButton() {
 	);
 }
 
+function Content() {
+	const query = useQuery();
+
+	switch (query.get('page')) {
+		case 'impressum':
+			return (
+				<>
+					<Impressum />
+					<BackButton />
+				</>
+			);
+		case 'league':
+			return (
+				<>
+					<Row>
+						<Col lg={12}>
+							<LeagueSelect />
+						</Col>
+					</Row>
+					<Row>
+						<Col lg={12}>
+							<League leagueId={query.get('leagueId')} />
+						</Col>
+					</Row>
+				</>
+			)
+		default:
+			return (
+				<>
+					<Row>
+						<Col lg={12}>
+							<LeagueSelect />
+						</Col>
+					</Row>
+				</>
+			)
+	}
+}
+
 function App() {
 	return (
-		<Router>
-			<Container>
-				<Row>
-					<Col lg={12}>
-						<h1>HVR Torschützen</h1>
-					</Col>
-				</Row>
-				<Switch>
-					<Route path="/impressum">
-						<Impressum />
-						<BackButton />
-					</Route>
-					<Route path="/">
-						<Row>
-							<Col lg={12}>
-								<LeagueSelect />
-							</Col>
-						</Row>
-						<Row>
-							<Col lg={12}>
-								<LeagueContainer />
-							</Col>
-						</Row>
-					</Route>
-				</Switch>
-				<Footer />
-			</Container>
-		</Router>
+		<Container>
+			<Row>
+				<Col lg={12}>
+					<h1>HVR Torschützen</h1>
+				</Col>
+			</Row>
+			<Content />
+			<Footer />
+		</Container>
 	)
 }
 
-export default App;
+function RoutedApp() {
+	return (
+	  <Router>
+		<App />
+	  </Router>
+	);
+  }
+
+export default RoutedApp;

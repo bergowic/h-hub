@@ -11,7 +11,7 @@ function Footer() {
 	return (
 		<Navbar fixed="bottom" bg="light" variant="light">
 			<Nav className="mr-auto">
-				<Link to="/impressum">Impressum</Link>
+				<Link to="/?page=impressum">Impressum</Link>
 			</Nav>
 		</Navbar>
 	)

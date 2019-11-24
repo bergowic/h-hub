@@ -1,10 +1,9 @@
+import _ from 'underscore';
+
 import React from 'react';
-
-import './index.ui.css';
-
 import Table from 'react-bootstrap/Table';
 
-import _ from 'underscore';
+import './index.ui.css';
 
 function mergeGoalsOfPlayer(teamState, player) {
   if (!teamState[player.name]) {
@@ -85,12 +84,12 @@ class League extends React.Component {
 
 		fetch('/assets/league-' + leagueId + '.json')
 			.then(resp => resp.json())
-		  .then((games) => {
+			.then((games) => {
 				this.setState({teams: mergeGoalsOfGames(games)})
-		  })
-		  .catch((error) => {
-		    console.error(error)
-		  })
+			})
+			.catch((error) => {
+				console.error(error)
+			})
 	}
 
 	onSort(header) {

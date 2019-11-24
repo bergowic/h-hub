@@ -3,54 +3,80 @@ import _ from 'underscore';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 
+import { BackButton } from '../controls/button';
+import Player from './player';
+
 import './index.ui.css';
 
-function mergeGoalsOfPlayer(teamState, player) {
-  if (!teamState[player.name]) {
-    teamState[player.name] = {
-      goals: 0,
-      goals7m: 0,
-      attempts7m: 0,
-      games: 0
-    };
-  }
+import { generalStats } from './stats';
 
-  const playerState = teamState[player.name];
-  playerState.goals += player.goals;
-  playerState.goals7m += player.goals7m;
-  playerState.attempts7m += player.attempts7m;
-  playerState.games += 1;
+function mergeGoalsOfPlayer(teamState, game, player) {
+	if (!teamState.players[player.name]) {
+		teamState.players[player.name] = {
+			goals: 0,
+			goals7m: 0,
+			attempts7m: 0,
+			games: 0,
+			gameHistory: {},
+			teamGames: teamState.games,
+		};
+	}
+
+	const playerState = teamState.players[player.name];
+	playerState.goals += player.goals;
+	playerState.goals7m += player.goals7m;
+	playerState.attempts7m += player.attempts7m;
+	playerState.games += 1;
+	playerState.gameHistory[game._id] = {
+		goals: player.goals,
+		goalsField: player.goals - player.goals7m,
+		goals7m: player.goals7m,
+		attempts7m: player.attempts7m,
+		quote7m: calcQuote(player.goals7m, player.attempts7m),
+		game: game,
+	};
 }
 
-function mergeGoalsOfTeam(state, team, results) {
-  if (!state[team]) {
-    state[team] = {};
-  }
+function mergeGoalsOfTeam(state, game, team) {
+	const teamName = game[team];
+	if (!state[teamName]) {
+		state[teamName] = {
+			players: {},
+			games: []
+		};
+	}
 
-  results.players.forEach(player => mergeGoalsOfPlayer(state[team], player));
+	game.results[team].players.forEach(player => mergeGoalsOfPlayer(state[teamName], game, player));
+	state[teamName].games.push(game);
 }
 
 function mergeGoalsOfGames(games) {
 	const teams = {}
 
-	games.forEach(game => {
-		if (game.results) {
-			mergeGoalsOfTeam(teams, game.home, game.results.home);
-		  mergeGoalsOfTeam(teams, game.guest, game.results.guest);
-		}
-	});
+	games
+		.sort((g1, g2) => g1.time.localeCompare(g2.time))
+		.forEach(game => {
+			if (game.results) {
+				mergeGoalsOfTeam(teams, game, 'home');
+				mergeGoalsOfTeam(teams, game, 'guest');
+			}
+		});
 
 	return teams;
 }
 
-function getPlayerArrayFromTeam(team, players) {
-	return Object.keys(players).map(player => {
+function getPlayerArrayFromTeam(teamName, team) {
+	return Object.keys(team.players).map(player => {
 		return {
-			...players[player],
+			...team.players[player],
 			name: player,
-			team: team,
+			team: teamName,
 		}
 	});
+}
+
+function calcQuote(success, trials) {
+	return trials > 0 ? Math.round((success / trials) * 100) : -1
 }
 
 const DEFAULT_STATE = {
@@ -60,6 +86,7 @@ const DEFAULT_STATE = {
 	},
 	teams: undefined,
 	team: undefined,
+	player: undefined,
 }
 
 class League extends React.Component {
@@ -70,6 +97,7 @@ class League extends React.Component {
 		this.loadLeague();
 
 		this.onSort = this.onSort.bind(this);
+		this.onSelectPlayer = this.onSelectPlayer.bind(this);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -94,10 +122,10 @@ class League extends React.Component {
 
 	onSort(header) {
 		const sort = {
-			attr: header.sort
+			attr: header.value
 		}
 
-		if (this.state.sort.attr === header.sort) {
+		if (this.state.sort.attr === header.value) {
 			sort.order = this.state.sort.order * -1;
 		} else {
 			sort.order = -1;
@@ -106,8 +134,12 @@ class League extends React.Component {
 		this.setState({ sort });
 	}
 
+	onSelectPlayer(player) {
+		this.setState({ player })
+	}
+
 	renderHeader(header) {
-		if (!header.sort) {
+		if (!header.value) {
 			return (
 				<th key={header.name}>{header.name}</th>
 			)
@@ -120,7 +152,7 @@ class League extends React.Component {
 				key={header.name}
 			>
 				{header.name}
-				{header.sort === this.state.sort.attr && (
+				{header.value === this.state.sort.attr && (
 					<i className={'arrow ' + (this.state.sort.order < 0 ? 'down' : 'up')} />
 				)}
 			</th>
@@ -151,19 +183,12 @@ class League extends React.Component {
 				<Table striped bordered hover>
 					<thead>
 						<tr>
-							{[
+							{_.flatten([
 								{name: '#'},
 								{name: 'Name'},
-								{name: 'Tore', sort: 'goals'},
-								{name: 'Spiele', sort: 'games'},
-								{name: 'Tore / Spiel', sort: 'goalsPerGame'},
-								{name: 'Feldtore', sort: 'goalsField'},
-								{name: 'Feldtore / Spiel', sort: 'goalsFieldPerGame'},
-								{name: '7m - Tore', sort: 'goals7m'},
-								{name: '7m - Versuche', sort: 'attempts7m'},
-								{name: '7m - Quote', sort: 'quote7m'},
+								generalStats,
 								{name: this.renderTeamSelect()},
-							].map(header => this.renderHeader(header))}
+							]).map(header => this.renderHeader(header))}
 						</tr>
 					</thead>
 					<tbody>
@@ -173,7 +198,7 @@ class League extends React.Component {
 								goalsPerGame: Math.round((player.goals / player.games) * 100) / 100,
 								goalsField: player.goals - player.goals7m,
 								goalsFieldPerGame: Math.round(((player.goals - player.goals7m) / player.games) * 100) / 100,
-								quote7m: player.attempts7m > 0 ? Math.round((player.goals7m / player.attempts7m) * 100) : -1,
+								quote7m: calcQuote(player.goals7m, player.attempts7m),
 							}
 						}).sort((p1, p2) => {
 							const sort = this.state.sort;
@@ -183,10 +208,10 @@ class League extends React.Component {
 							}
 
 							return p1.name.localeCompare(p2.name);
-						}).map((player, id) => {
+						}).map((player, i) => {
 							return (
-								<tr key={id}>
-									<td>{id + 1}</td>
+								<tr key={i} onClick={() => this.onSelectPlayer(player)}>
+									<td>{i + 1}</td>
 									<td>{player.name}</td>
 									<td>{player.goals}</td>
 									<td>{player.games}</td>
@@ -214,7 +239,14 @@ class League extends React.Component {
 		}
 
 		let players;
-		if (this.state.team) {
+		if (this.state.player) {
+			return (
+				<>
+					<Player {...this.state.player} />
+					<BackButton onClick={() => this.onSelectPlayer(null)} />
+				</>
+			)
+		} else if (this.state.team) {
 			players = getPlayerArrayFromTeam(this.state.team, this.state.teams[this.state.team]);
 		} else {
 			players = [];

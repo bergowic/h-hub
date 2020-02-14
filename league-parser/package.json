@@ -6,8 +6,8 @@
   "author": "Lukas Berg",
   "license": "MIT",
   "dependencies": {
+    "got": "10.5.5",
     "moment-timezone": "0.5.27",
-    "request": "2.88.0",
     "sha1": "1.1.1"
   }
 }

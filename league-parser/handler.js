@@ -1,76 +1,34 @@
-'use strict';
+'use strict'
 
-const AWS = require('aws-sdk');
+const { getGames } = require('./parser')
+const { getGame } = require('./storage')
+const { sendMessage } = require('./queue')
 
-const { getGames } = require('./parser');
+const sendGame = async (queueUrl, league, game) => {
+	const oldGame = await getGame(game._id)
 
-const sqs = new AWS.SQS();
-const dynamoDb = new AWS.DynamoDB();
+	if (oldGame && oldGame.results) {
+		return
+	}
 
-async function sendGame(queueUrl, league, game) {
-	return new Promise((success, fail) => {
-		getGame(game, (err, data) => {
-			if (err) {
-				fail(err);
-			} else {
-				const oldGame = AWS.DynamoDB.Converter.unmarshall(data.Item);
+	console.log('game', game, oldGame)
 
-				if (oldGame && oldGame.results) {
-					success();
-				} else {
-					console.log('game', game, oldGame);
+	const body = {
+		league: league,
+		game: game,
+	}
 
-					const body = {
-						league: league,
-						game: game,
-					};
-			
-					const params = {
-						MessageBody: JSON.stringify(body),
-						QueueUrl: queueUrl
-					};
-			
-					sqs.sendMessage(params, (err, res) => {
-						if (err) {
-							fail(err);
-						} else {
-							success(res);
-						}
-					});
-				}
-			}
-		});
-	});
+	return sendMessage(body)
 }
 
-function getGame(game, cb) {
-	const key = {
-		_id: game._id
-	};
-	const params = {
-		Key: AWS.DynamoDB.Converter.marshall(key),
-		TableName: process.env.TABLE_NAME,
-	};
+module.exports.parseLeague = async (event, context) => {
+	const league = JSON.parse(event.Records[0].body)
 
-	dynamoDb.getItem(params, cb);
+	console.log('league', league)
+
+	const games = await getGames(league)
+
+	return Promise.all(games)
+		.filter(game => game.report)
+		.map(async (game) => await sendGame(league, game))
 }
-
-module.exports.parseLeague = (event, context, cb) => {
-	const accountId = context.invokedFunctionArn.split(":")[4];
-	const queueUrl = 'https://sqs.eu-central-1.amazonaws.com/' + accountId + '/' + process.env.QUEUE_NAME;
-
-	const league = JSON.parse(event.Records[0].body);
-
-	console.log('league', league);
-
-	getGames(league).then((games) => {
-		return Promise.all(games
-			.filter(game => game.report)
-			.map(game => sendGame(queueUrl, league, game))
-		)
-	}).then((data) => {
-		cb(null, data);
-	}, (err) => {
-		cb(err);
-	});
-};

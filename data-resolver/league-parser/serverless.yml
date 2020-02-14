@@ -56,3 +56,6 @@ functions:
                 - Ref: AWS::AccountId
                 - ${file(../config.json):league-parse-queue-name}
           batchSize: 1
+
+resources:
+  Resources:

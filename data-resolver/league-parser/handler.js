@@ -18,17 +18,19 @@ const sendGame = async (queueUrl, league, game) => {
 		game: game,
 	}
 
-	return sendMessage(body)
+	return sendMessage(queueUrl, body)
 }
 
 module.exports.parseLeague = async (event, context) => {
+	const accountId = context.invokedFunctionArn.split(':')[4]
+	const queueUrl = 'https://sqs.eu-central-1.amazonaws.com/' + accountId + '/' + process.env.QUEUE_NAME
 	const league = JSON.parse(event.Records[0].body)
 
-	console.log('league', league)
+	console.log('league', league);
 
-	const games = await getGames(league)
-
-	return Promise.all(games)
-		.filter(game => game.report)
-		.map(async (game) => await sendGame(league, game))
+	return Promise.all(
+		(await getGames(league))
+			.filter((game) => game.report)
+			.map((game) => sendGame(queueUrl, league, game))
+	)
 }

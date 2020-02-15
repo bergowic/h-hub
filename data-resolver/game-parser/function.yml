@@ -1,0 +1,7 @@
+handler: game-parser/handler.parseGame
+role: GameParserRole
+events:
+  - sqs:
+      arn:
+        Fn::GetAtt: GameParserQueue.Arn
+      batchSize: 1

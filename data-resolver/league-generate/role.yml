@@ -1,0 +1,31 @@
+Type: AWS::IAM::Role
+Properties:
+  RoleName: LeagueGenerateRole
+  AssumeRolePolicyDocument:
+    Statement:
+      - Effect: Allow
+        Principal:
+          Service: lambda.amazonaws.com
+        Action: sts:AssumeRole
+  Policies:
+    - PolicyName: LeagueGeneratePolicy
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action:
+              - sqs:DeleteMessage
+              - sqs:GetQueueAttributes
+              - sqs:ReceiveMessage
+            Resource:
+              Fn::GetAtt: LeagueGenerateQueue.Arn
+
+          - Effect: Allow
+            Action:
+              - dynamodb:Scan
+            Resource:
+              Fn::GetAtt: GameTable.Arn
+
+          - Effect: Allow
+            Action:
+              - s3:PutObject
+            Resource: arn:aws:s3:::${self:custom.BucketName}/assets/*

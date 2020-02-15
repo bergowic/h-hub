@@ -1,0 +1,13 @@
+Type: AWS::DynamoDB::Table
+Properties:
+  TableName: ${self:custom.GameTableName}
+  KeySchema:
+    - AttributeName: _id
+      KeyType: HASH
+  AttributeDefinitions:
+    - AttributeName: _id
+      AttributeType: S
+  BillingMode: PROVISIONED
+  ProvisionedThroughput:
+    ReadCapacityUnits: 5
+    WriteCapacityUnits: 5

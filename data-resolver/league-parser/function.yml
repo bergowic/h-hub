@@ -1,0 +1,9 @@
+handler: league-parser/handler.parseLeague
+role: LeagueParserRole
+events:
+  - sqs:
+      arn:
+        Fn::GetAtt: LeagueParserQueue.Arn
+      batchSize: 1
+environment:
+  QUEUE_NAME: ${self:custom.GameParserQueueName}

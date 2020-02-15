@@ -1,0 +1,26 @@
+Type: AWS::IAM::Role
+Properties:
+  RoleName: GameParserRole
+  AssumeRolePolicyDocument:
+    Statement:
+      - Effect: Allow
+        Principal:
+          Service: lambda.amazonaws.com
+        Action: sts:AssumeRole
+  Policies:
+    - PolicyName: GameParserPolicy
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Action:
+              - sqs:DeleteMessage
+              - sqs:GetQueueAttributes
+              - sqs:ReceiveMessage
+            Resource:
+              Fn::GetAtt: GameParserQueue.Arn
+
+          - Effect: Allow
+            Action:
+              - dynamodb:PutItem
+            Resource:
+              Fn::GetAtt: GameTable.Arn

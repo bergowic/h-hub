@@ -1,0 +1,48 @@
+service: h-hub-data-resolver
+
+custom:
+  BucketName: ${file(../config.json):bucket-name}
+  GameTableName: ${file(../config.json):game-table-name}
+  GameParserQueueName: ${file(../config.json):game-parse-queue-name}
+  LeagueGenerateQueueName: ${file(../config.json):league-generate-queue-name}
+  LeagueParserQueueName: ${file(../config.json):league-parse-queue-name}
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 512
+  timeout: 30
+
+  region: eu-central-1
+
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - cloudwatch:*
+      - logs:*
+    Resource:
+      - "*"
+
+  environment:
+    BUCKET_NAME: ${self:custom.BucketName}
+    TABLE_NAME: ${self:custom.GameTableName}
+
+functions:
+  game-parser: ${file(game-parser/function.yml)}
+  league-generate: ${file(league-generate/function.yml)}
+  league-generate-trigger: ${file(league-generate-trigger/function.yml)}
+  league-parser: ${file(league-parser/function.yml)}
+  league-parser-trigger: ${file(league-parser-trigger/function.yml)}
+
+resources:
+  Resources:
+    GameParserQueue: ${file(resources/game-parser-queue.yml)}
+    GameTable: ${file(resources/game-table.yml)}
+    LeagueGenerateQueue: ${file(resources/league-generate-queue.yml)}
+    LeagueParserQueue: ${file(resources/league-parser-queue.yml)}
+
+    GameParserRole: ${file(game-parser/role.yml)}
+    LeagueGenerateRole: ${file(league-generate/role.yml)}
+    LeagueGenerateTriggerRole: ${file(league-generate-trigger/role.yml)}
+    LeagueParserRole: ${file(league-parser/role.yml)}
+    LeagueParserTriggerRole: ${file(league-parser-trigger/role.yml)}

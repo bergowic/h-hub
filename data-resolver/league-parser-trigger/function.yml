@@ -1,0 +1,6 @@
+handler: league-parser-trigger/handler.triggerParseLeagues
+role: LeagueParserTriggerRole
+events:
+  - schedule: cron(30 23 * * ? *)
+environment:
+  QUEUE_NAME: ${self:custom.LeagueParserQueueName}

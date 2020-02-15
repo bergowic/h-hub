@@ -1,0 +1,6 @@
+handler: league-generate-trigger/handler.triggerGenerateLeagues
+role: LeagueGenerateTriggerRole
+events:
+  - schedule: cron(0 0 * * ? *)
+environment:
+  QUEUE_NAME: ${self:custom.LeagueGenerateQueueName}

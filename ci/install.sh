@@ -1,6 +1,4 @@
-cd data-resolver/game-parser
-npm install
-cd ../league-parser
+cd data-resolver
 npm install
 cd ../../scorers
 npm install

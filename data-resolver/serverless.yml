@@ -13,15 +13,8 @@ provider:
   memorySize: 512
   timeout: 30
 
-  region: eu-central-1
 
-  iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - cloudwatch:*
-      - logs:*
-    Resource:
-      - "*"
+  region: eu-central-1
 
   environment:
     BUCKET_NAME: ${self:custom.BucketName}

@@ -1,4 +1,4 @@
 cd data-resolver
 npm install
-cd ../../scorers
+cd ../scorers
 npm install

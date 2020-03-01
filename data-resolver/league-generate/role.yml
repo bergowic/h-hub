@@ -1,6 +1,6 @@
 Type: AWS::IAM::Role
 Properties:
-  RoleName: LeagueGenerateRole
+  RoleName: LeagueGenerateRole-${self:custom.Stage}
   AssumeRolePolicyDocument:
     Statement:
       - Effect: Allow
@@ -8,7 +8,7 @@ Properties:
           Service: lambda.amazonaws.com
         Action: sts:AssumeRole
   Policies:
-    - PolicyName: LeagueGeneratePolicy
+    - PolicyName: LeagueGeneratePolicy-${self:custom.Stage}
       PolicyDocument:
         Statement:
           - Effect: Allow

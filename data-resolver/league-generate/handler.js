@@ -34,13 +34,18 @@ module.exports.generateLeague = (event, context, cb) => {
 				params.ExclusiveStartKey = data.LastEvaluatedKey;
 				dynamoDb.scan(params, onScan);
 			} else {
-				s3.putObject({
-					Bucket: process.env.BUCKET_NAME,
-					Key: 'assets/league-' + league._id + '.json',
-					Body: JSON.stringify(games),
-					ContentType: 'application/json',
-					CacheControl: 'no-cache',
-				}, cb);
+				if (process.env.STAGE === 'prod') {
+					s3.putObject({
+						Bucket: process.env.BUCKET_NAME,
+						Key: 'assets/league-' + league._id + '.json',
+						Body: JSON.stringify(games),
+						ContentType: 'application/json',
+						CacheControl: 'no-cache',
+					}, cb);
+				} else {
+					console.log('NOT IN PRODUCTION', JSON.stringify(games))
+					cb()
+				}
 			}
 		}
 	}

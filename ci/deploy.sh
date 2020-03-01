@@ -1,5 +1,5 @@
 cd data-resolver
-sls deploy
+sls deploy --stage prod
 cd ../scorers
 npm run build
 aws s3 rm s3://$AWS_S3_BUCKET --recursive --exclude assets/*

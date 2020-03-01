@@ -1,11 +1,13 @@
 service: h-hub-data-resolver
 
 custom:
+  Stage: ${opt:stage, 'local'}
+
   BucketName: ${file(../config.json):bucket-name}
-  GameTableName: ${file(../config.json):game-table-name}
-  GameParserQueueName: ${file(../config.json):game-parse-queue-name}
-  LeagueGenerateQueueName: ${file(../config.json):league-generate-queue-name}
-  LeagueParserQueueName: ${file(../config.json):league-parse-queue-name}
+  GameTableName: ${file(../config.json):game-table-name}-${self:custom.Stage}
+  GameParserQueueName: ${file(../config.json):game-parse-queue-name}-${self:custom.Stage}
+  LeagueGenerateQueueName: ${file(../config.json):league-generate-queue-name}-${self:custom.Stage}
+  LeagueParserQueueName: ${file(../config.json):league-parse-queue-name}-${self:custom.Stage}
 
 provider:
   name: aws
@@ -13,12 +15,13 @@ provider:
   memorySize: 512
   timeout: 30
 
-
   region: eu-central-1
+  stage: ${self:custom.Stage}
 
   environment:
     BUCKET_NAME: ${self:custom.BucketName}
     TABLE_NAME: ${self:custom.GameTableName}
+    STAGE: ${self:custom.Stage}
 
 functions:
   game-parser: ${file(game-parser/function.yml)}

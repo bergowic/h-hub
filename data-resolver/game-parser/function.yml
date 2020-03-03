@@ -4,4 +4,4 @@ events:
   - sqs:
       arn:
         Fn::GetAtt: GameParserQueue.Arn
-      batchSize: 1
+      batchSize: 10

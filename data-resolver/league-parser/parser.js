@@ -10,7 +10,7 @@ const REPORT_URL_BASE = 'http://spo.handball4all.de/misc/sboPublicReports.php?sG
 
 const getGame = (leagueId, rawGame) => {
   const game = {
-    _id: sha1(leagueId + '-' + rawGame.gHomeTeam + '-' + rawGame.gGuestTeam),
+    _id: sha1(leagueId + '-' + rawGame.gID + '-' + rawGame.gHomeTeam + '-' + rawGame.gGuestTeam),
     gameId: rawGame.gID,
     leagueId: leagueId,
     home: rawGame.gHomeTeam,

@@ -28,7 +28,7 @@ Properties:
 
           - Effect: Allow
             Action:
-              - dynamodb:GetItem
+              - dynamodb:BatchGetItem
             Resource:
               Fn::GetAtt: GameTable.Arn
 

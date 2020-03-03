@@ -9,5 +9,5 @@ Properties:
       AttributeType: S
   BillingMode: PROVISIONED
   ProvisionedThroughput:
-    ReadCapacityUnits: 5
-    WriteCapacityUnits: 5
+    ReadCapacityUnits: 25
+    WriteCapacityUnits: 25

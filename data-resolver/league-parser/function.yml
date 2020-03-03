@@ -4,6 +4,6 @@ events:
   - sqs:
       arn:
         Fn::GetAtt: LeagueParserQueue.Arn
-      batchSize: 1
+      batchSize: 10
 environment:
   QUEUE_NAME: ${self:custom.GameParserQueueName}

@@ -1,36 +1,54 @@
 'use strict'
 
-const { getGames } = require('./parser')
-const { getGame } = require('./storage')
-const { sendMessage } = require('./queue')
+const _ = require('underscore')
 
-const sendGame = async (queueUrl, league, game) => {
-	const oldGame = await getGame(game._id)
+const parser = require('./parser')
+const storage = require('./storage')
+const { sendMessages } = require('./queue')
 
-	if (oldGame && oldGame.results) {
-		return
-	}
+const BATCH_SEND_SIZE = 10
+const BATCH_READ_SIZE = 100
 
-	console.log('game', game, oldGame)
-
-	const body = {
-		league: league,
-		game: game,
-	}
-
-	return sendMessage(queueUrl, body)
-}
+const getGamesFromParser = parser.getGames
+const getGamesFromStorage = storage.getGames
 
 module.exports.parseLeague = async (event, context) => {
 	const accountId = context.invokedFunctionArn.split(':')[4]
 	const queueUrl = 'https://sqs.eu-central-1.amazonaws.com/' + accountId + '/' + process.env.QUEUE_NAME
-	const league = JSON.parse(event.Records[0].body)
 
-	console.log('league', league);
+	return Promise.all(event.Records.map(async (record) => {
+		const league = JSON.parse(record.body);
+		console.log('league', league);
 
-	return Promise.all(
-		(await getGames(league))
-			.filter((game) => game.report)
-			.map((game) => sendGame(queueUrl, league, game))
-	)
+		const games = await getGamesFromParser(league)
+		let batches = []
+
+		while (batches.length * BATCH_READ_SIZE < games.length) {
+			const start = batches.length * BATCH_READ_SIZE
+			batches.push(games.slice(start, start + BATCH_READ_SIZE))
+		}
+
+		const gamesToSend = _.flatten(await Promise.all(batches.map(async (batch) => {
+			const oldGames = (await getGamesFromStorage(batch.map((game) => game._id)))
+				.filter((game) => game.results)
+				.map((game) => game._id)
+
+			return batch.filter((game) => !oldGames.includes(game._id))
+		})))
+
+		batches = []
+		while (batches.length * BATCH_SEND_SIZE < gamesToSend.length) {
+			const start = batches.length * BATCH_SEND_SIZE
+			batches.push(gamesToSend.slice(start, start + BATCH_SEND_SIZE))
+		}
+
+		return Promise.all(batches.map((batch) => {
+			const messages = batch.map((game) => ({
+				league: league,
+				game: game,
+			}))
+
+			return sendMessages(queueUrl, messages)
+		}))
+	}));
 }

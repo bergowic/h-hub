@@ -12,16 +12,17 @@ const unmarshall = (arg) => {
   return AWS.DynamoDB.Converter.unmarshall(arg)
 }
 
-module.exports.getGame = async (id) => {
-  const key = {
-		_id: id,
-	}
+module.exports.getGames = async (gameIds) => {
 	const params = {
-		Key: marshall(key),
-		TableName: process.env.TABLE_NAME,
+    RequestItems: {
+  		[process.env.TABLE_NAME]: {
+        Keys: gameIds.map((gameId) => marshall({
+          _id: gameId
+        })),
+      }
+    }
 	}
 
-  const result = await dynamoDb.getItem(params).promise()
-
-  return unmarshall(result.Item)
+  const result = await dynamoDb.batchGetItem(params).promise()
+  return result.Responses[process.env.TABLE_NAME].map(unmarshall)
 }

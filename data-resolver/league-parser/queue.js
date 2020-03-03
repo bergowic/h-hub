@@ -4,11 +4,16 @@ const AWS = require('aws-sdk')
 
 const sqs = new AWS.SQS()
 
-module.exports.sendMessage = (queueUrl, body) => {
+module.exports.sendMessages = (queueUrl, messages) => {
   const params = {
-		MessageBody: JSON.stringify(body),
+		Entries: messages.map((message) => {
+      return {
+        Id: message.game._id,
+        MessageBody: JSON.stringify(message),
+      }
+    }),
 		QueueUrl: queueUrl,
 	}
 
-	return sqs.sendMessage(params).promise()
+	return sqs.sendMessageBatch(params).promise()
 }

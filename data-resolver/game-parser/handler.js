@@ -26,33 +26,33 @@ function getGameResults(url) {
 	});
 }
 
-module.exports.parseGame = (event, context, cb) => {
-	const message = JSON.parse(event.Records[0].body);
-	const league = message.league;
-	const game = message.game;
+module.exports.parseGame = async (event, context) => {
+	return Promise.all(event.Records.map(async (record) => {
+		const message = JSON.parse(record.body)
+		const league = message.league
+		const game = message.game
 
-	console.log('league', league);
-	console.log('game', game);
+		console.log('league', league);
+		console.log('game', game);
 
-	getGameResults(game.report.url).then((results) => {
-		game.results = {
-			home: {
-				players: results.home.players
-			},
-			guest: {
-				players: results.guest.players
+		if (game.report) {
+			const results = await getGameResults(game.report.url)
+			game.results = {
+				home: {
+					players: results.home.players
+				},
+				guest: {
+					players: results.guest.players
+				},
 			}
-		};
-
-		console.log('results', JSON.stringify(game));
-
-		const params = {
-			Item: AWS.DynamoDB.Converter.marshall(game),
-			TableName: process.env.TABLE_NAME
 		}
 
-		dynamoDb.putItem(params, cb);
-	}, (err) => {
-		cb(err);
-	});
-};
+		console.log('results', JSON.stringify(game));
+		const params = {
+			Item: AWS.DynamoDB.Converter.marshall(game),
+			TableName: process.env.TABLE_NAME,
+		}
+
+		return dynamoDb.putItem(params).promise()
+	}))
+}

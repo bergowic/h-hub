@@ -1908,7 +1908,7 @@ function getSeasonIds(): Set<string> {
     return new Set(ids)
 }
 
-describe("Association transformer", async () => {
+describe("Association transformer", () => {
     let rawAssociation: RawAssociation
     let association: Association
 
@@ -1930,6 +1930,6 @@ describe("Association transformer", async () => {
     test("Suborganisation Ids", async () => {
         const subOrganisationiIds = getSubOrganisationIds()
 
-        expect(association.subOrganisationiIds).toStrictEqual(new Set(subOrganisationiIds))
+        expect(association.subOrganisationIds).toStrictEqual(new Set(subOrganisationiIds))
     })
 })

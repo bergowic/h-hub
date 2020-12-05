@@ -30,6 +30,6 @@ export function transformRawOrganisation(rawOrganisation: RawOrganisation | RawA
 export function transformRawAssociation(rawAssociation: RawAssociation): Association {
     return {
         ...transformRawOrganisation(rawAssociation),
-        subOrganisationiIds: getSubOrganisationIds(rawAssociation.menu.org),
+        subOrganisationIds: getSubOrganisationIds(rawAssociation.menu.org),
     }    
 }

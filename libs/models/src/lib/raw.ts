@@ -8,18 +8,18 @@ export interface Period {
     selectedID: string,
 }
 
-interface Dt {
+export interface Dt {
     list: {[key: string]: string},
     selected: string,
 }
 
-interface Menu {
+export interface Menu {
     org: Org,
     period: Period,
     dt: Dt,
 }
 
-interface Head {
+export interface Head {
     name: string,
     sname: string,
     headline1: string,
@@ -29,7 +29,7 @@ interface Head {
     repURL: string,
 }
 
-interface Class {
+export interface Class {
     gClassID: string,
     gClassSname: string,
     gClassLname: string,
@@ -41,11 +41,11 @@ interface Class {
     games: any[],
 }
 
-interface AssociationContent {
+export interface OrganisationContent {
     classes: Class[],
 }
 
-interface Game {
+export interface Game {
     gID: string,
     sGID: any,
     gNo: string,
@@ -74,7 +74,7 @@ interface Game {
     gReferee: string,
 }
 
-interface GamesContainer {
+export interface GamesContainer {
     gClassID: string,
     gClassSname: string,
     gClassLname: string,
@@ -87,9 +87,9 @@ interface GamesContainer {
 }
 
 // If string it will be always empty: ""
-type TabScore = number | string
+export type TabScore = number | string
 
-interface Score {
+export interface Score {
     tabScore: TabScore,
     tabTeamID: string,
     tabTeamname: string,
@@ -109,24 +109,12 @@ interface Score {
 }
 
 // If object it has no keys: {}
-type Games = GamesContainer | []
-
-interface OrganisationContent {
-    actualGames: Games,
-    score: Score[],
-    scoreComments: string[],
-    futureGames: Games,
-    scoreShowDataPerGame: boolean,
-}
-
-export interface RawAssociation {
-    menu: Menu,
-    head: Head,
-    content: AssociationContent,
-}
+export type Games = GamesContainer | []
 
 export interface RawOrganisation {
     menu: Menu,
     head: Head,
     content: OrganisationContent,
 }
+
+export type RawAssociation = RawOrganisation

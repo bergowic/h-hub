@@ -1908,6 +1908,12 @@ function getSeasonIds(): Set<string> {
     return new Set(ids)
 }
 
+function getLeagueIds(): Set<string> {
+    const ids = ASSOCIATION.content.classes.map(league => league.gClassID)
+
+    return new Set(ids)
+}
+
 describe("Association transformer", () => {
     let rawAssociation: RawAssociation
     let association: Association
@@ -1919,6 +1925,10 @@ describe("Association transformer", () => {
         association = transformRawAssociation(rawAssociation)
     })
 
+    test("Id", async () => {
+        expect(association.id).toBe(rawAssociation.menu.org.selectedID)
+    })
+
     test("Name", async () => {
         expect(association.name).toBe(rawAssociation.head.name)
     })
@@ -1928,8 +1938,20 @@ describe("Association transformer", () => {
     })
     
     test("Suborganisation Ids", async () => {
-        const subOrganisationiIds = getSubOrganisationIds()
+        const ids = getSubOrganisationIds()
 
-        expect(association.subOrganisationIds).toStrictEqual(new Set(subOrganisationiIds))
+        expect(association.subOrganisationIds).toStrictEqual(ids)
+    })
+
+    test("Season Ids", async () => {
+        const ids = getSeasonIds()
+
+        expect(association.seasonIds).toStrictEqual(ids)
+    })
+
+    test("League Ids", async () => {
+        const ids = getLeagueIds()
+
+        expect(association.leagueIds).toStrictEqual(ids)
     })
 })

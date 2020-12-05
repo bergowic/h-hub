@@ -1,9 +1,9 @@
-interface Organisation {
+export interface Org {
     list: {[key: string]: string},
     selectedID: string,
 }
 
-interface Period {
+export interface Period {
     list: {[key: string]: string},
     selectedID: string,
 }
@@ -14,7 +14,7 @@ interface Dt {
 }
 
 interface Menu {
-    org: Organisation,
+    org: Org,
     period: Period,
     dt: Dt,
 }

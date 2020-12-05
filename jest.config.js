@@ -1,3 +1,3 @@
 module.exports = {
-  projects: ['<rootDir>/libs/models'],
+  projects: ['<rootDir>/libs/models', '<rootDir>/apps/association-parser'],
 };

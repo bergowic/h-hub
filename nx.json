@@ -25,6 +25,9 @@
   "projects": {
     "models": {
       "tags": []
+    },
+    "association-parser": {
+      "tags": []
     }
   }
 }

@@ -21,9 +21,60 @@
           }
         }
       }
+    },
+    "association-parser": {
+      "root": "apps/association-parser",
+      "sourceRoot": "apps/association-parser/src",
+      "projectType": "application",
+      "prefix": "association-parser",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/association-parser",
+            "main": "apps/association-parser/src/main.ts",
+            "tsConfig": "apps/association-parser/tsconfig.app.json",
+            "assets": ["apps/association-parser/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/association-parser/src/environments/environment.ts",
+                  "with": "apps/association-parser/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "association-parser:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/association-parser/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/association-parser/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/node"
+  },
+  "defaultProject": "association-parser"
 }

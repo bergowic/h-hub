@@ -117,4 +117,4 @@ export interface RawOrganisation {
     content: OrganisationContent,
 }
 
-export type RawAssociation = RawOrganisation
+export interface RawAssociation extends RawOrganisation {}

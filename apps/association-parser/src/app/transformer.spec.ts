@@ -1,6 +1,6 @@
-import { Association, RawAssociation } from '@h-hub/models';
+import { Association, Organisation, RawAssociation, RawOrganisation } from '@h-hub/models';
 import { Resolver } from "./resolver";
-import { transformRawAssociation } from './transformer';
+import { transformRawAssociation, transformRawOrganisation } from './transformer';
 
 const ASSOCIATION = {
     "header": {
@@ -1878,9 +1878,17 @@ const ASSOCIATION = {
     }
 } as RawAssociation
 
-class SuccessResolver implements Resolver<RawAssociation> {
+const ORGANISATION = ASSOCIATION as RawOrganisation
+
+class AssociationResolver implements Resolver<RawAssociation> {
     async resolve() : Promise<RawAssociation> {
         return ASSOCIATION
+    }
+}
+
+class OrganisationResolver implements Resolver<RawOrganisation> {
+    async resolve() : Promise<RawOrganisation> {
+        return ORGANISATION
     }
 }
 
@@ -1919,7 +1927,7 @@ describe("Association transformer", () => {
     let association: Association
 
     beforeAll(async () => {
-        const resolver = new SuccessResolver()
+        const resolver = new AssociationResolver()
 
         rawAssociation = await resolver.resolve()
         association = transformRawAssociation(rawAssociation)
@@ -1953,5 +1961,41 @@ describe("Association transformer", () => {
         const ids = getLeagueIds()
 
         expect(association.leagueIds).toStrictEqual(ids)
+    })
+})
+
+describe("Organisation transformer", () => {
+    let rawOrganisation: RawOrganisation
+    let organisation: Organisation
+
+    beforeAll(async () => {
+        const resolver = new OrganisationResolver()
+
+        rawOrganisation = await resolver.resolve()
+        organisation = transformRawOrganisation(rawOrganisation)
+    })
+
+    test("Id", async () => {
+        expect(organisation.id).toBe(rawOrganisation.menu.org.selectedID)
+    })
+
+    test("Name", async () => {
+        expect(organisation.name).toBe(rawOrganisation.head.name)
+    })
+
+    test("Short name", async () => {
+        expect(organisation.shortName).toBe(rawOrganisation.head.sname)
+    })
+
+    test("Season Ids", async () => {
+        const ids = getSeasonIds()
+
+        expect(organisation.seasonIds).toStrictEqual(ids)
+    })
+
+    test("League Ids", async () => {
+        const ids = getLeagueIds()
+
+        expect(organisation.leagueIds).toStrictEqual(ids)
     })
 })

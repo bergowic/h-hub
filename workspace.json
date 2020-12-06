@@ -72,6 +72,56 @@
         }
       }
     },
+    "organisation-parser": {
+      "root": "apps/organisation-parser",
+      "sourceRoot": "apps/organisation-parser/src",
+      "projectType": "application",
+      "prefix": "organisation-parser",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/organisation-parser",
+            "main": "apps/organisation-parser/src/main.ts",
+            "tsConfig": "apps/organisation-parser/tsconfig.app.json",
+            "assets": ["apps/organisation-parser/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/organisation-parser/src/environments/environment.ts",
+                  "with": "apps/organisation-parser/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "organisation-parser:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/organisation-parser/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/organisation-parser/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "common": {
       "root": "libs/common",
       "sourceRoot": "libs/common/src",

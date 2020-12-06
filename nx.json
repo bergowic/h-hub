@@ -29,6 +29,9 @@
     "association-parser": {
       "tags": []
     },
+    "organisation-parser": {
+      "tags": []
+    },
     "common": {
       "tags": []
     },

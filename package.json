@@ -27,7 +27,7 @@
   },
   "private": true,
   "dependencies": {
-    "@types/lodash": "^4.14.165",
+    "got": "^11.8.0",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
@@ -37,8 +37,10 @@
     "@nrwl/node": "10.4.4",
     "@nrwl/tao": "10.4.4",
     "@nrwl/workspace": "10.4.4",
+    "@types/aws-lambda": "^8.10.64",
     "@types/jest": "^26.0.8",
-    "@types/node": "~8.9.4",
+    "@types/lodash": "^4.14.165",
+    "@types/node": "^8.9.5",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "dotenv": "6.2.0",

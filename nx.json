@@ -28,6 +28,12 @@
     },
     "association-parser": {
       "tags": []
+    },
+    "common": {
+      "tags": []
+    },
+    "environment": {
+      "tags": []
     }
   }
 }

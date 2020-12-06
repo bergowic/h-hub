@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@h-hub/models": ["libs/models/src/index.ts"]
+      "@h-hub/models": ["libs/models/src/index.ts"],
+      "@h-hub/common": ["libs/common/src/index.ts"],
+      "@h-hub/environment": ["libs/environment/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

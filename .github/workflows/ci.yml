@@ -31,7 +31,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: app-build
-        path: dist
+        path: dist/**
         if-no-files-found: error
         retention-days: 7
 
@@ -56,7 +56,9 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: cdk-build
-        path: cdk
+        path: |
+          cdk/bin/**/*.js
+          cdk/lib/**/*.js
         if-no-files-found: error
         retention-days: 7
 
@@ -87,6 +89,7 @@ jobs:
     - name: Install cdk
       run: |
         npm install -g aws-cdk@1.80.0
+        (cd cdk && npm ci)
 
     - name: Deploy cdk
       run: |

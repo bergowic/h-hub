@@ -91,6 +91,10 @@ jobs:
         npm install -g aws-cdk@1.80.0
         (cd cdk && npm ci)
 
+    - name: Bootstrap cdk
+      run: |
+        (cd cdk && cdk bootstrap)
+
     - name: Deploy cdk
       run: |
         (cd cdk && cdk deploy --require-approval never)

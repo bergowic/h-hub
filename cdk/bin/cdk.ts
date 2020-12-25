@@ -13,5 +13,9 @@ new CdkStack(app, `${STAGE}-h-hub`, {
     env: { 
         account: process.env.CDK_DEFAULT_ACCOUNT,
         region: process.env.CDK_DEPLOY_REGION || process.env.CDK_DEFAULT_REGION || 'eu-central-1',
+    },
+    tags: {
+        PRODUCT: 'h-hub',
+        STAGE: STAGE,
     }
 });

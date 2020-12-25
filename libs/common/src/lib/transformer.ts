@@ -1,6 +1,6 @@
 import { toNumber } from 'lodash'
 
-import { Association, RawAssociation, Org, RawOrganisation, Organisation, Period, Class } from "@h-hub/models";
+import { Association, RawAssociation, Org, RawOrganisation, Organisation, Period, Class, JsonOrganisation, JsonAssociation } from "@h-hub/models";
 
 function isIdLower(baseId: string, compareId: string): boolean {
     return toNumber(baseId) < toNumber(compareId)
@@ -40,4 +40,19 @@ export function transformRawAssociation(rawAssociation: RawAssociation): Associa
         ...transformRawOrganisation(rawAssociation),
         subOrganisationIds: getSubOrganisationIds(rawAssociation.menu.org),
     }    
+}
+
+export function organisationToJson(organisation: Organisation): JsonOrganisation {
+    return {
+        ...organisation,
+        seasonIds: [...organisation.seasonIds],
+        leagueIds: [...organisation.leagueIds],
+    }
+}
+
+export function associationToJson(association: Association): JsonAssociation {
+    return {
+        ...organisationToJson(association),
+        subOrganisationIds: [...association.subOrganisationIds],
+    }
 }

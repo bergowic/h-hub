@@ -5,3 +5,11 @@ export interface Organisation {
     seasonIds: Set<string>,
     leagueIds: Set<string>,
 }
+
+export interface JsonOrganisation {
+    id: string,
+    name: string,
+    shortName: string,
+    seasonIds: string[],
+    leagueIds: string[],
+}

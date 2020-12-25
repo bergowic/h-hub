@@ -20,7 +20,7 @@ jobs:
         npm ci
 
     - name: Build nx
-      uses: mansagroup/nrwl-nx-action@v1
+      uses: mansagroup/nrwl-nx-action@v1.0.1
       with:
         targets: build
         all: true

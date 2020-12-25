@@ -17,7 +17,7 @@ jobs:
 
     - name: Install nx
       run: |
-        npm install -g nx
+        npm install -g nx@10.4.4
 
     - name: Install package dependencies
       run: |

@@ -1,3 +1,3 @@
 #/bin/bash
 
-(export CLOUD=local && cd cdk && cdk deploy)
+(export STAGE=local && cd cdk && cdk deploy)

@@ -27,6 +27,14 @@ jobs:
       run: |
         nx affected:build --all
 
+    - name: Upload build
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-build
+        path: dist
+        if-no-files-found: error
+        retention-days: 7
+
   build-cdk:
     runs-on: ubuntu-latest
 
@@ -44,6 +52,14 @@ jobs:
       run: |
         (cd cdk && npm run build)
 
+    - name: Upload build
+      uses: actions/upload-artifact@v2
+      with:
+        name: cdk-build
+        path: cdk
+        if-no-files-found: error
+        retention-days: 7
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -56,6 +72,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Download cdk build
+      uses: actions/download-artifact@v2
+      with:
+        name: build-cdk
+
+    - name: Download app build
+      uses: actions/download-artifact@v2
+      with:
+        name: build-app
+        path: cdk/dist
 
     - name: Install cdk
       run: |

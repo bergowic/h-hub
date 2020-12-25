@@ -6,7 +6,7 @@ on:
       - v2.0
 
 jobs:
-  build app:
+  build-app:
     runs-on: ubuntu-latest
 
     container:
@@ -25,7 +25,7 @@ jobs:
         targets: build
         all: true
 
-  build cdk:
+  build-cdk:
     runs-on: ubuntu-latest
 
     container:
@@ -46,8 +46,8 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: 
-    - build app
-    - build cdk
+    - build-app
+    - build-cdk
 
     steps:
     - uses: actions/checkout@v2

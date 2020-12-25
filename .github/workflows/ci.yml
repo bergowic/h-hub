@@ -57,7 +57,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install cdk@1.80.0
+    - name: Install cdk
+      run: |
+        npm install -g aws-cdk@1.80.0
+
+    - name: Deploy cdk
       run: |
         (cd cdk && cdk deploy)
       env:

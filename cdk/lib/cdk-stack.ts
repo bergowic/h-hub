@@ -6,7 +6,7 @@ export class CdkStack extends cdk.Stack {
     super(scope, id, props);
 
     new lambda.Function(this, 'AssociationParser', {
-      code: lambda.Code.fromAsset('dist/association-parser'),
+      code: lambda.Code.fromAsset('dist/apps/association-parser'),
       handler: 'main.handler',
       runtime: lambda.Runtime.NODEJS_12_X,
     })

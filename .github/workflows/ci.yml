@@ -47,6 +47,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    container:
+      image: node:14.15-buster
+
     needs: 
     - build-app
     - build-cdk
@@ -54,12 +57,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: youyo/aws-cdk-github-actions@v1
-      with:
-        cdk_subcommand: 'deploy'
-        cdk_args: '--require-approval never'
-        actions_comment: false
-        working_dir: 'cdk'
+    - name: Install cdk@1.80.0
+      run: |
+        (cd cdk && cdk deploy)
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

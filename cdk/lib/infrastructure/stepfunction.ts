@@ -11,3 +11,6 @@ export function invoke(scope: CdkStack, name: string, props: task.LambdaInvokePr
     return new task.LambdaInvoke(scope, name, props)
 }
 
+export function map(scope: CdkStack, name: string, props?: sfn.MapProps): sfn.Map {
+    return new sfn.Map(scope, name, props)
+}

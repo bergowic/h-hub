@@ -1,48 +1,44 @@
+import * as lambda from "@aws-cdk/aws-lambda";
+
 import { CdkStack } from "../cdk-stack";
 import { getLambdaFromApp } from "../infrastructure/lambda";
 
-import { invoke, run, map } from "../infrastructure/stepfunction";
+import { invoke, run } from "../infrastructure/stepfunction";
 
 interface Task {
     app: string,
     description: string,
 }
 
-const ASSOCIATION_PARSER = {
-    app: "association-parser",
-    description: "Parse association",
+const BASE_ORGANISATION_PARSER = {
+    app: "organisation-parser",
+    description: "Parse base organisation",
 }
 
-const ORGANISATION_PARSER = {
-    app: "organisation-parser",
-    description: "Parse organisation",
+const lambdas: {[key: string]: lambda.Function} = {}
+function getLambda(scope: CdkStack, app: string) {
+    if (!lambdas[app]) {
+        lambdas[app] = getLambdaFromApp(scope, app)
+    }
+
+    return lambdas[app]
 }
 
 function getInvoke(scope: CdkStack, task: Task) {
-    const lambda = getLambdaFromApp(scope, task.app)
+    const lambda = getLambda(scope, task.app)
 
     return invoke(scope, task.description, {
         lambdaFunction: lambda,
         outputPath: "$.Payload",
     })
-} 
-
-function parseAssociation(scope: CdkStack) {
-    return getInvoke(scope, ASSOCIATION_PARSER)
-}
+}   
 
 function parseOrganisation(scope: CdkStack) {
-    return map(scope, "Parse organisations", {
-        itemsPath: "$.subOrganisationIds",
-        parameters: {
-            "id.$": "$$.Map.Item.Value",
-        },
-    }).iterator(getInvoke(scope, ORGANISATION_PARSER))
+    return getInvoke(scope, BASE_ORGANISATION_PARSER)
 }
 
 export function createCrawler(scope: CdkStack) {
     return run(scope, "GamesCrawler", {
-        definition: parseAssociation(scope)
-            .next(parseOrganisation(scope))
+        definition: parseOrganisation(scope)
     })
 }

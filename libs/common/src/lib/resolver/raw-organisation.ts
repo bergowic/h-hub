@@ -1,4 +1,3 @@
-import { RawOrganisation } from "@h-hub/models";
 import { ORGANISATION_URL_PATTERN } from "@h-hub/environment";
 import { JsonResolver } from "./json";
 import { Resolver } from "./resolver";
@@ -10,7 +9,7 @@ export interface RawOrgProps {
     orgId?: string,
 }
 
-export class RawOrganisationResolver<T extends RawOrganisation> implements Resolver<T> {
+export class RawOrganisationResolver<RawOrganisation> implements Resolver<RawOrganisation> {
     private props: RawOrgProps
 
     constructor(props: RawOrgProps) {
@@ -28,11 +27,11 @@ export class RawOrganisationResolver<T extends RawOrganisation> implements Resol
         return util.format(ORGANISATION_URL_PATTERN, this.props.id, this.getOrgId())
     }
 
-    async resolve(): Promise<T> {
+    async resolve(): Promise<RawOrganisation> {
         const websiteResolver = new WebsiteResolver(this.getUrl())
-        const jsonResolver = new JsonResolver<T[]>(websiteResolver)
+        const jsonResolver = new JsonResolver<RawOrganisation[]>(websiteResolver)
         const organisations = await jsonResolver.resolve()
-        
+
         // will return an array with one entry
         return organisations[0]
     }

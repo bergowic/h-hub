@@ -1,8 +1,8 @@
-import { Association, Organisation, RawAssociation, RawOrganisation } from '@h-hub/models';
+import { Organisation, RawOrganisation } from '@h-hub/models';
 import { Resolver } from "./resolver";
-import { transformRawAssociation, transformRawOrganisation } from './transformer';
+import { transformRawOrganisation } from './transformer';
 
-const ASSOCIATION = {
+const ORGANISATION = {
     "header": {
         "version": "alpha",
         "(C)": "Handball4all AG"
@@ -1876,15 +1876,7 @@ const ASSOCIATION = {
             "nv": "( /  / )"
         }
     }
-} as RawAssociation
-
-const ORGANISATION = ASSOCIATION as RawOrganisation
-
-class AssociationResolver implements Resolver<RawAssociation> {
-    async resolve() : Promise<RawAssociation> {
-        return ASSOCIATION
-    }
-}
+} as RawOrganisation
 
 class OrganisationResolver implements Resolver<RawOrganisation> {
     async resolve() : Promise<RawOrganisation> {
@@ -1904,65 +1896,22 @@ function isOrganisationIdHigher(baseId: string, compareId: string): boolean {
 }
 
 function getSubOrganisationIds(): Set<string> {
-    const ids = Object.keys(ASSOCIATION.menu.org.list)
-    const cleanIds = ids.filter((id) => isOrganisationIdHigher(id, ASSOCIATION.menu.org.selectedID) )
+    const ids = Object.keys(ORGANISATION.menu.org.list)
 
-    return new Set(cleanIds)
+    return new Set(ids)
 }
 
 function getSeasonIds(): Set<string> {
-    const ids = Object.keys(ASSOCIATION.menu.period.list)
+    const ids = Object.keys(ORGANISATION.menu.period.list)
 
     return new Set(ids)
 }
 
 function getLeagueIds(): Set<string> {
-    const ids = ASSOCIATION.content.classes.map(league => league.gClassID)
+    const ids = ORGANISATION.content.classes.map(league => league.gClassID)
 
     return new Set(ids)
 }
-
-describe("Association transformer", () => {
-    let rawAssociation: RawAssociation
-    let association: Association
-
-    beforeAll(async () => {
-        const resolver = new AssociationResolver()
-
-        rawAssociation = await resolver.resolve()
-        association = transformRawAssociation(rawAssociation)
-    })
-
-    test("Id", async () => {
-        expect(association.id).toBe(rawAssociation.menu.org.selectedID)
-    })
-
-    test("Name", async () => {
-        expect(association.name).toBe(rawAssociation.head.name)
-    })
-
-    test("Short name", async () => {
-        expect(association.shortName).toBe(rawAssociation.head.sname)
-    })
-    
-    test("Suborganisation Ids", async () => {
-        const ids = getSubOrganisationIds()
-
-        expect(association.subOrganisationIds).toStrictEqual(ids)
-    })
-
-    test("Season Ids", async () => {
-        const ids = getSeasonIds()
-
-        expect(association.seasonIds).toStrictEqual(ids)
-    })
-
-    test("League Ids", async () => {
-        const ids = getLeagueIds()
-
-        expect(association.leagueIds).toStrictEqual(ids)
-    })
-})
 
 describe("Organisation transformer", () => {
     let rawOrganisation: RawOrganisation
@@ -1977,6 +1926,10 @@ describe("Organisation transformer", () => {
 
     test("Id", async () => {
         expect(organisation.id).toBe(rawOrganisation.menu.org.selectedID)
+    })
+
+    test("OrgId", async () => {
+        expect(organisation.orgId).toBeUndefined()
     })
 
     test("Name", async () => {
@@ -1997,5 +1950,11 @@ describe("Organisation transformer", () => {
         const ids = getLeagueIds()
 
         expect(organisation.leagueIds).toStrictEqual(ids)
+    })
+
+    test("Suborganisation Ids", async () => {
+        const ids = getSubOrganisationIds()
+
+        expect(organisation.subOrgIds).toStrictEqual(ids)
     })
 })

@@ -116,5 +116,3 @@ export interface RawOrganisation {
     head: Head,
     content: OrganisationContent,
 }
-
-export interface RawAssociation extends RawOrganisation {}

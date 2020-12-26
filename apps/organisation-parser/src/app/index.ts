@@ -1,14 +1,18 @@
-import { RawOrganisationResolver, transformRawOrganisation } from "@h-hub/common"
+import { RawOrganisationResolver, transformRawOrganisation, RawOrgProps } from "@h-hub/common"
 import { Organisation, RawOrganisation } from "@h-hub/models"
 
-async function getRawOrganisation(id: string): Promise<RawOrganisation> {
-    const resolver = new RawOrganisationResolver<RawOrganisation>(id)
+async function getRawOrganisation(props: RawOrgProps): Promise<RawOrganisation> {
+    const resolver = new RawOrganisationResolver<RawOrganisation>(props)
 
     return await resolver.resolve()
 }
 
-export async function getOrganisation(id: string): Promise<Organisation> {
-    const rawOrganisation = await getRawOrganisation(id)
+export async function getOrganisation(props: RawOrgProps): Promise<Organisation> {
+    const rawOrganisation = await getRawOrganisation(props)
+    const organisation = transformRawOrganisation(rawOrganisation)
 
-    return transformRawOrganisation(rawOrganisation)
+    return {
+        ...organisation,
+        orgId: props.orgId,
+    }
 }

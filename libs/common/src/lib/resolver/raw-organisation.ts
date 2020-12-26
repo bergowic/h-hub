@@ -5,15 +5,27 @@ import { Resolver } from "./resolver";
 import { WebsiteResolver } from "./website";
 import * as util from "util";
 
-export class RawOrganisationResolver<T extends RawOrganisation> implements Resolver<T> {
-    private id: string
+export interface RawOrgProps {
+    id: string,
+    orgId?: string,
+}
 
-    constructor(id: string) {
-        this.id = id
+export class RawOrganisationResolver<T extends RawOrganisation> implements Resolver<T> {
+    private props: RawOrgProps
+
+    constructor(props: RawOrgProps) {
+        this.props = props
+    }
+
+    private getOrgId(): string {
+        if (this.props.orgId) {
+            return this.props.orgId
+        }
+        return this.props.id
     }
 
     private getUrl(): string {
-        return util.format(ORGANISATION_URL_PATTERN, this.id, this.id)
+        return util.format(ORGANISATION_URL_PATTERN, this.props.id, this.getOrgId())
     }
 
     async resolve(): Promise<T> {

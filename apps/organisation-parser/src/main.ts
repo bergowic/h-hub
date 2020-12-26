@@ -1,13 +1,9 @@
-import { organisationToJson } from "@h-hub/common";
+import { organisationToJson, RawOrgProps } from "@h-hub/common";
 import { JsonOrganisation } from "@h-hub/models"
 import { getOrganisation } from "./app";
 
-interface Props {
-    id: string,
-}
-
-export const handler = async ({ id }: Props): Promise<JsonOrganisation> => {
-    const organisation = await getOrganisation(id)
+export const handler = async (props: RawOrgProps): Promise<JsonOrganisation> => {
+    const organisation = await getOrganisation(props)
 
     return organisationToJson(organisation)
 }

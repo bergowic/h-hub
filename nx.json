@@ -26,9 +26,6 @@
     "models": {
       "tags": []
     },
-    "association-parser": {
-      "tags": []
-    },
     "organisation-parser": {
       "tags": []
     },

@@ -9,6 +9,7 @@ export class WebsiteResolver implements Resolver<string> {
     }
 
     async resolve(): Promise<string> {
+        console.log('fetch', this.url)
         const response = await got(this.url)
 
         return response.body

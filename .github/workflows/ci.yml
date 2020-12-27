@@ -25,7 +25,7 @@ jobs:
 
     - name: Build nx
       run: |
-        nx affected:build --all
+        nx affected:build --all --prod
 
     - name: Upload build
       uses: actions/upload-artifact@v2

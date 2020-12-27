@@ -3,7 +3,7 @@ import * as lambda from "@aws-cdk/aws-lambda";
 import { CdkStack } from "../cdk-stack";
 import { getLambdaFromApp } from "../infrastructure/lambda";
 
-import { invoke, run } from "../infrastructure/stepfunction";
+import { invoke, map, run } from "../infrastructure/stepfunction";
 
 interface Task {
     app: string,
@@ -34,7 +34,10 @@ function getInvoke(scope: CdkStack, task: Task) {
 }   
 
 function parseOrganisation(scope: CdkStack) {
-    return getInvoke(scope, BASE_ORGANISATION_PARSER)
+    const parser = getInvoke(scope, BASE_ORGANISATION_PARSER)
+
+    return map(scope, "Parse base organisations")
+        .iterator(parser)
 }
 
 export function createCrawler(scope: CdkStack) {

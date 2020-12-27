@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/organisation-parser',
     '<rootDir>/libs/common',
     '<rootDir>/libs/environment',
+    '<rootDir>/apps/organisation-merger',
   ],
 };

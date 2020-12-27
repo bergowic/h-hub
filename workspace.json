@@ -114,6 +114,56 @@
           }
         }
       }
+    },
+    "organisation-merger": {
+      "root": "apps/organisation-merger",
+      "sourceRoot": "apps/organisation-merger/src",
+      "projectType": "application",
+      "prefix": "organisation-merger",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/organisation-merger",
+            "main": "apps/organisation-merger/src/main.ts",
+            "tsConfig": "apps/organisation-merger/tsconfig.app.json",
+            "assets": ["apps/organisation-merger/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/organisation-merger/src/environments/environment.ts",
+                  "with": "apps/organisation-merger/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "organisation-merger:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/organisation-merger/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/organisation-merger/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

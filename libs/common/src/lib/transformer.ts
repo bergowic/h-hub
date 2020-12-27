@@ -43,3 +43,12 @@ export function organisationToJson(organisation: Organisation): JsonOrganisation
         subOrgIds: organisation.subOrgIds ? [...organisation.subOrgIds] : undefined,
     }
 }
+
+export function jsonToOrganisation(json: JsonOrganisation): Organisation {
+    return {
+        ...json,
+        seasonIds: new Set(json.seasonIds),
+        leagueIds: new Set(json.leagueIds),
+        subOrgIds: json.subOrgIds ? new Set(json.subOrgIds) : undefined,
+    }
+}

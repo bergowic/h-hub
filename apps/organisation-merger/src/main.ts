@@ -1,7 +1,7 @@
 import { jsonToOrganisation, organisationToJson, RawOrgProps } from "@h-hub/common";
 import { JsonOrganisation } from "@h-hub/models";
 
-import { getParentOrganisations, getBaseOrganisations, getSubOrganisations } from "./app";
+import { getParentOrgs, getBaseOrganisations, getSubOrgs } from "./app";
 
 interface Result {
     subOrgs: RawOrgProps[],
@@ -12,13 +12,13 @@ interface Result {
 export const handler = async (props: JsonOrganisation[]): Promise<Result> => {
     const orgs = props.map(jsonToOrganisation)
 
-    const subOrganisations = getSubOrganisations(orgs)
+    const subOrgs = getSubOrgs(orgs)
     const baseOrganisations = getBaseOrganisations(orgs)
-    const parentOrganisations = getParentOrganisations(orgs)
+    const parentOrgs = getParentOrgs(orgs)
 
     return {
-        subOrgs: subOrganisations,
+        subOrgs: subOrgs,
         baseOrganisations: baseOrganisations.map(organisationToJson),
-        parentOrgs: parentOrganisations,
+        parentOrgs: parentOrgs,
     }
 }

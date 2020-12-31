@@ -1,6 +1,7 @@
+import { RawOrgProps } from "@h-hub/common"
 import { Organisation } from "@h-hub/models"
 
-export const getParentOrganisations = (orgs: Organisation[]): Organisation[] => {
+export const getParentOrgs = (orgs: Organisation[]): RawOrgProps[] => {
     return []
 }
 
@@ -8,6 +9,6 @@ export const getBaseOrganisations = (orgs: Organisation[]): Organisation[] => {
     return []
 }
 
-export const getSubOrganisations = (orgs: Organisation[]): Organisation[] => {
+export const getSubOrgs = (orgs: Organisation[]): RawOrgProps[] => {
     return []
 }

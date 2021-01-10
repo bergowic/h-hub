@@ -64,28 +64,29 @@ describe("getParentOrgs", () => {
     test("Finds multiple", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "5", "1004"])
+            subOrgIds: new Set(["4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["6", "4", "5"])
+            subOrgIds: new Set(["5", "4", "1005"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["1006", "6", "106"])
+            subOrgIds: new Set(["6", "106", "1006"])
+        }
+        const orgD: Organisation = {
+            ...organisationD,
+            subOrgIds: new Set(["7", "107", "106"])
         }
 
         const parentOrg1: RawOrgProps = {
             id: "4"
         }
         const parentOrg2: RawOrgProps = {
-            id: "5"
-        }
-        const parentOrg3: RawOrgProps = {
-            id: "6"
+            id: "106"
         }
 
-        expect(getParentOrgs([orgA, orgB, orgC])).toEqual([parentOrg1, parentOrg2, parentOrg3])
+        expect(getParentOrgs([orgA, orgB, orgC, orgD])).toEqual([parentOrg1, parentOrg2])
     })
 
     test("Finds no same", () => {
@@ -115,7 +116,7 @@ describe("getParentOrgs", () => {
             subOrgIds: new Set(["4", "5"])
         }
 
-        expect(getParentOrgs([orgA, orgB])).toThrow()
+        expect(() => getParentOrgs([orgA, orgB])).toThrow()
     })
 })
 

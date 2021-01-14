@@ -125,7 +125,7 @@ describe("getParentOrgs", () => {
 
     test("Handles empty subOrgs", () => {
         expect(getSubOrgs([organisationA])).toEqual([])
-})
+    })
 })
 
 describe("getBaseOrganisations", () => {
@@ -160,7 +160,11 @@ describe("getBaseOrganisations", () => {
             orgId: "4",
         }
 
-        expect(getBaseOrganisations([orgA, orgB, orgC])).toEqual([baseErganisationA, baseErganisationB, baseErganisationC])
+        expect(
+            getBaseOrganisations([orgA, orgB, orgC]).sort(compareOrg)
+        ).toEqual(
+            [baseErganisationA, baseErganisationB, baseErganisationC].sort(compareOrg)
+        )
     })
 
     test("With multiple parent", () => {
@@ -198,7 +202,11 @@ describe("getBaseOrganisations", () => {
             orgId: "6",
         }
 
-        expect(getBaseOrganisations([orgA, orgB, orgC])).toEqual([baseErganisationA, baseErganisationB, baseErganisationC, baseErganisationD])
+        expect(
+            getBaseOrganisations([orgA, orgB, orgC]).sort(compareOrg)
+        ).toEqual(
+            [baseErganisationA, baseErganisationB, baseErganisationC, baseErganisationD].sort(compareOrg)
+        )
     })
 
     test("With wrong parent", () => {
@@ -211,7 +219,7 @@ describe("getBaseOrganisations", () => {
             subOrgIds: new Set(["4", "5"])
         }
 
-        expect(getBaseOrganisations([orgA, orgB])).toThrow()
+        expect(() => getBaseOrganisations([orgA, orgB])).toThrow()
     })
 
     test("With subs", () => {
@@ -228,7 +236,11 @@ describe("getBaseOrganisations", () => {
             subOrgIds: new Set(["1006", "106", "6"])
         }
 
-        expect(getBaseOrganisations([orgA, orgB, orgC])).toEqual([orgA, orgB, orgC])
+        expect(
+            getBaseOrganisations([orgA, orgB, orgC]).sort(compareOrg)
+        ).toEqual(
+            [orgA, orgB, orgC].sort(compareOrg)
+        )
     })
 
     test("With parent and subs", () => {
@@ -261,7 +273,11 @@ describe("getBaseOrganisations", () => {
             subOrgIds: new Set(["106", "1006"]),
         }
 
-        expect(getSubOrgs([orgA, orgB, orgC])).toEqual([baseErganisationA, baseErganisationB, baseErganisationC])
+        expect(
+            getSubOrgs([orgA, orgB, orgC]).sort(compareOrg)
+        ).toEqual(
+            [baseErganisationA, baseErganisationB, baseErganisationC].sort(compareOrg)
+        )
     })
 
     test("No parent and subs", () => {
@@ -280,7 +296,7 @@ describe("getBaseOrganisations", () => {
 
     test("Handles empty subOrgs", () => {
         expect(getSubOrgs([organisationA])).toEqual([organisationA])
-})
+    })
 })
 
 describe("getSubOrgs", () => {

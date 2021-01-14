@@ -35,6 +35,10 @@ const organisationD: Organisation = {
     seasonIds: new Set(["110", "111", "112"]),
 }
 
+function compareOrg(org1: RawOrgProps, org2: RawOrgProps): number {
+    return org1.id.localeCompare(org2.id)
+}
+
 describe("getParentOrgs", () => {
     test("Empty list", () => {
         expect(getParentOrgs([])).toEqual([])
@@ -315,7 +319,11 @@ describe("getSubOrgs", () => {
             orgId: orgC.id,
         }
 
-        expect(getSubOrgs([orgA, orgB, orgC])).toEqual([subOrg1, subOrg2, subOrg3, subOrg4, subOrg5, subOrg6])
+        expect(
+            getSubOrgs([orgA, orgB, orgC]).sort(compareOrg)
+        ).toEqual(
+            [subOrg1, subOrg2, subOrg3, subOrg4, subOrg5, subOrg6].sort(compareOrg)
+        )
     })
 
     test("Finds no different", () => {

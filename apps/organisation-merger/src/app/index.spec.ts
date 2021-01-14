@@ -122,6 +122,10 @@ describe("getParentOrgs", () => {
 
         expect(() => getParentOrgs([orgA, orgB])).toThrow()
     })
+
+    test("Handles empty subOrgs", () => {
+        expect(getSubOrgs([organisationA])).toEqual([])
+})
 })
 
 describe("getBaseOrganisations", () => {
@@ -273,6 +277,10 @@ describe("getBaseOrganisations", () => {
 
         expect(getBaseOrganisations([orgA, orgB, orgC])).toEqual([orgA, orgB, orgC])
     })
+
+    test("Handles empty subOrgs", () => {
+        expect(getSubOrgs([organisationA])).toEqual([organisationA])
+})
 })
 
 describe("getSubOrgs", () => {
@@ -341,5 +349,9 @@ describe("getSubOrgs", () => {
         }
 
         expect(getSubOrgs([orgA, orgB, orgC])).toEqual([])
+    })
+
+    test("Handles empty subOrgs", () => {
+        expect(getSubOrgs([organisationA])).toEqual([])
     })
 })

@@ -1,5 +1,6 @@
 import { RawOrgProps } from "@h-hub/common"
 import { Organisation } from "@h-hub/models"
+import { omit } from "lodash"
 
 type MapCounter = Map<string, number>
 
@@ -74,20 +75,67 @@ function isSubOrg(count: number): boolean {
     return count === 1
 }
 
-export const getParentOrgs = (orgs: Organisation[]): RawOrgProps[] => {
+function getParentOrgIds(orgs: Organisation[]): Set<string> {
     const parentOrgIds = getFilteredSubOrgIds(orgs, isParentOrg)
 
     orgs.forEach(org => assertOneParentMax(org, parentOrgIds))
 
+    return parentOrgIds
+}
+
+function getSubOrgIds(orgs: Organisation[]): Set<string> {
+    return getFilteredSubOrgIds(orgs, isSubOrg)
+}
+
+export const getParentOrgs = (orgs: Organisation[]): RawOrgProps[] => {
+    const parentOrgIds = getParentOrgIds(orgs)
+
     return getRawOrgProps(parentOrgIds)
 }
 
+function isBaseOrganisation(id: string, allParentOrgIds: Set<string>, allSubOrgIds: Set<string>): boolean {
+    return !allParentOrgIds.has(id) && !allSubOrgIds.has(id)
+}
+
+function getBaseOrganisationOrgId(origSubOrgIds: Set<string>, allParentOrgIds: Set<string>): string | undefined {
+    return toArray(origSubOrgIds).find(id => allParentOrgIds.has(id))
+}
+
+function getBaseOrganisationSubOrgIds(origSubOrgIds: Set<string>, allSubOrgIds: Set<string>): Set<string> | undefined {
+    const subOrgIds = toArray(origSubOrgIds).filter(id => allSubOrgIds.has(id))
+
+    if (subOrgIds.length > 0) {
+        return new Set(subOrgIds)
+    }
+
+    return undefined
+}
+
+function getBaseOrganisation(org: Organisation, allParentOrgIds: Set<string>, allSubOrgIds: Set<string>): Organisation {
+    const orgId = getBaseOrganisationOrgId(org.subOrgIds, allParentOrgIds)
+    const subOrgIds = getBaseOrganisationSubOrgIds(org.subOrgIds, allSubOrgIds)
+
+    const organisation: Organisation = omit({ ...org }, 'orgId', 'subOrgIds')
+    if (orgId) {
+        organisation.orgId = orgId
+    }
+    if (subOrgIds) {
+        organisation.subOrgIds = subOrgIds
+    }
+
+    return organisation
+}
+
 export const getBaseOrganisations = (orgs: Organisation[]): Organisation[] => {
-    return []
+    const allParentOrgIds = getParentOrgIds(orgs)
+    const allSubOrgIds = getSubOrgIds(orgs)
+
+    return orgs.filter(({ id }) => isBaseOrganisation(id, allParentOrgIds, allSubOrgIds))
+        .map(org => getBaseOrganisation(org, allParentOrgIds, allSubOrgIds))
 }
 
 export const getSubOrgs = (orgs: Organisation[]): RawOrgProps[] => {
-    const subOrgIds = getFilteredSubOrgIds(orgs, isSubOrg)
+    const subOrgIds = getSubOrgIds(orgs)
 
     return orgs.flatMap(organisation => 
         getRawOrgProps(toArray(organisation.subOrgIds)

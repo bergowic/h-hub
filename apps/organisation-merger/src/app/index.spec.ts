@@ -124,7 +124,7 @@ describe("getParentOrgs", () => {
     })
 
     test("Handles empty subOrgs", () => {
-        expect(getSubOrgs([organisationA])).toEqual([])
+        expect(getParentOrgs([organisationA])).toEqual([])
     })
 })
 
@@ -133,7 +133,7 @@ describe("getBaseOrganisations", () => {
         expect(getBaseOrganisations([])).toEqual([])
     })
 
-    test("With parent", () => {
+    test("With parent only", () => {
         const orgA: Organisation = {
             ...organisationA,
             subOrgIds: new Set(["4"])
@@ -148,15 +148,15 @@ describe("getBaseOrganisations", () => {
         }
 
         const baseErganisationA: Organisation = {
-            ...orgA,
+            ...organisationA,
             orgId: "4",
         }
         const baseErganisationB: Organisation = {
-            ...orgB,
+            ...organisationB,
             orgId: "4",
         }
         const baseErganisationC: Organisation = {
-            ...orgC,
+            ...organisationC,
             orgId: "4",
         }
 
@@ -186,24 +186,24 @@ describe("getBaseOrganisations", () => {
         }
 
         const baseErganisationA: Organisation = {
-            ...orgA,
+            ...organisationA,
             orgId: "5",
         }
         const baseErganisationB: Organisation = {
-            ...orgB,
+            ...organisationB,
             orgId: "5",
         }
         const baseErganisationC: Organisation = {
-            ...orgC,
+            ...organisationC,
             orgId: "6",
         }
         const baseErganisationD: Organisation = {
-            ...orgD,
+            ...organisationD,
             orgId: "6",
         }
 
         expect(
-            getBaseOrganisations([orgA, orgB, orgC]).sort(compareOrg)
+            getBaseOrganisations([orgA, orgB, orgC, orgD]).sort(compareOrg)
         ).toEqual(
             [baseErganisationA, baseErganisationB, baseErganisationC, baseErganisationD].sort(compareOrg)
         )
@@ -258,23 +258,23 @@ describe("getBaseOrganisations", () => {
         }
 
         const baseErganisationA: Organisation = {
-            ...orgA,
+            ...organisationA,
             orgId: "4",
             subOrgIds: new Set(["104", "1004"]),
         }
         const baseErganisationB: Organisation = {
-            ...orgB,
+            ...organisationB,
             orgId: "4",
             subOrgIds: new Set(["105", "1005"]),
         }
         const baseErganisationC: Organisation = {
-            ...orgC,
+            ...organisationC,
             orgId: "4",
             subOrgIds: new Set(["106", "1006"]),
         }
 
         expect(
-            getSubOrgs([orgA, orgB, orgC]).sort(compareOrg)
+            getBaseOrganisations([orgA, orgB, orgC]).sort(compareOrg)
         ).toEqual(
             [baseErganisationA, baseErganisationB, baseErganisationC].sort(compareOrg)
         )
@@ -295,7 +295,7 @@ describe("getBaseOrganisations", () => {
     })
 
     test("Handles empty subOrgs", () => {
-        expect(getSubOrgs([organisationA])).toEqual([organisationA])
+        expect(getBaseOrganisations([organisationA])).toEqual([organisationA])
     })
 })
 

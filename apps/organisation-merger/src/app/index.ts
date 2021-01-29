@@ -28,16 +28,16 @@ function addId(countIds: MapCounter, id: string): void {
     countIds.set(id, getIdCount(countIds, id) + 1)
 }
 
-function addIds(countIds: MapCounter, ids?: Set<string>): void {
-    if (ids) {
-        ids.forEach(id => addId(countIds, id))
-    }
+function addSubOrgIds(countIds: MapCounter, organisation: Organisation): void {
+    toArray(organisation.subOrgIds)
+        .filter(id => id !== organisation.id)
+        .forEach(id => addId(countIds, id))
 }
 
 function getSubOrgIdsCount(organisations: Organisation[]): MapCounter {
     const subOrgIdsCount: MapCounter = new Map()
 
-    organisations.forEach(organisation => addIds(subOrgIdsCount, organisation.subOrgIds))
+    organisations.forEach(organisation => addSubOrgIds(subOrgIdsCount, organisation))
 
     return subOrgIdsCount 
 }

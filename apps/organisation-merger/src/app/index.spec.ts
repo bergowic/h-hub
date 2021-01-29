@@ -47,15 +47,15 @@ describe("getParentOrgs", () => {
     test("Finds same", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["105", "4", "1005"])
+            subOrgIds: new Set([organisationB.id, "105", "4", "1005"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["1006", "106", "4"])
+            subOrgIds: new Set([organisationC.id, "1006", "106", "4"])
         }
 
         const parentOrg: RawOrgProps = {
@@ -68,26 +68,26 @@ describe("getParentOrgs", () => {
     test("Finds multiple", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "5", "105", "1005"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["5", "4", "1005"])
+            subOrgIds: new Set([organisationB.id, "6", "5", "1006"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["6", "106", "1006"])
+            subOrgIds: new Set([organisationC.id, "7", "107", "1007"])
         }
         const orgD: Organisation = {
             ...organisationD,
-            subOrgIds: new Set(["7", "107", "106"])
+            subOrgIds: new Set([organisationD.id, "8", "108", "107"])
         }
 
         const parentOrg1: RawOrgProps = {
-            id: "4"
+            id: "5"
         }
         const parentOrg2: RawOrgProps = {
-            id: "106"
+            id: "107"
         }
 
         expect(getParentOrgs([orgA, orgB, orgC, orgD])).toEqual([parentOrg1, parentOrg2])
@@ -96,15 +96,15 @@ describe("getParentOrgs", () => {
     test("Finds no same", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["105", "5", "1005"])
+            subOrgIds: new Set([organisationB.id, "105", "5", "1005"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["1006", "106", "6"])
+            subOrgIds: new Set([organisationC.id, "1006", "106", "6"])
         }
 
         expect(getParentOrgs([orgA, orgB, orgC])).toEqual([])
@@ -113,11 +113,11 @@ describe("getParentOrgs", () => {
     test("Invalid", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "5"])
+            subOrgIds: new Set([organisationA.id, "4", "5"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["4", "5"])
+            subOrgIds: new Set([organisationB.id, "4", "5"])
         }
 
         expect(() => getParentOrgs([orgA, orgB])).toThrow()
@@ -136,15 +136,15 @@ describe("getBaseOrganisations", () => {
     test("With parent only", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4"])
+            subOrgIds: new Set([organisationA.id, "4"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["4"])
+            subOrgIds: new Set([organisationB.id, "4"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["4"])
+            subOrgIds: new Set([organisationC.id, "4"])
         }
 
         const baseErganisationA: Organisation = {
@@ -170,19 +170,19 @@ describe("getBaseOrganisations", () => {
     test("With multiple parent", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["5"])
+            subOrgIds: new Set([organisationA.id, "5"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["5"])
+            subOrgIds: new Set([organisationB.id, "5"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["6"])
+            subOrgIds: new Set([organisationC.id, "6"])
         }
         const orgD: Organisation = {
             ...organisationD,
-            subOrgIds: new Set(["6"])
+            subOrgIds: new Set([organisationD.id, "6"])
         }
 
         const baseErganisationA: Organisation = {
@@ -212,26 +212,39 @@ describe("getBaseOrganisations", () => {
     test("With wrong parent", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "5"])
+            subOrgIds: new Set([organisationA.id, "4", "5"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["4", "5"])
+            subOrgIds: new Set([organisationB.id, "4", "5"])
         }
 
         expect(() => getBaseOrganisations([orgA, orgB])).toThrow()
     })
 
-    test("With subs", () => {
+    test("With subs only", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["105", "5", "1005"])
+            subOrgIds: new Set([organisationB.id, "105", "5", "1005"])
         }
         const orgC: Organisation = {
+            ...organisationC,
+            subOrgIds: new Set([organisationC.id, "1006", "106", "6"])
+        }
+
+        const baseErganisationA: Organisation = {
+            ...organisationA,
+            subOrgIds: new Set(["4", "104", "1004"])
+        }
+        const baseErganisationB: Organisation = {
+            ...organisationB,
+            subOrgIds: new Set(["105", "5", "1005"])
+        }
+        const baseErganisationC: Organisation = {
             ...organisationC,
             subOrgIds: new Set(["1006", "106", "6"])
         }
@@ -239,22 +252,22 @@ describe("getBaseOrganisations", () => {
         expect(
             getBaseOrganisations([orgA, orgB, orgC]).sort(compareOrg)
         ).toEqual(
-            [orgA, orgB, orgC].sort(compareOrg)
+            [baseErganisationA, baseErganisationB, baseErganisationC].sort(compareOrg)
         )
     })
 
     test("With parent and subs", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["105", "4", "1005"])
+            subOrgIds: new Set([organisationB.id, "105", "4", "1005"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["1006", "106", "4"])
+            subOrgIds: new Set([organisationC.id, "1006", "106", "4"])
         }
 
         const baseErganisationA: Organisation = {
@@ -307,15 +320,15 @@ describe("getSubOrgs", () => {
     test("Finds different", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["105", "4", "1005"])
+            subOrgIds: new Set([organisationB.id, "105", "4", "1005"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["1006", "106", "4"])
+            subOrgIds: new Set([organisationC.id, "1006", "106", "4"])
         }
 
         const subOrg1: RawOrgProps = {
@@ -353,15 +366,15 @@ describe("getSubOrgs", () => {
     test("Finds no different", () => {
         const orgA: Organisation = {
             ...organisationA,
-            subOrgIds: new Set(["4", "104", "1004"])
+            subOrgIds: new Set([organisationA.id, "4", "104", "1004"])
         }
         const orgB: Organisation = {
             ...organisationB,
-            subOrgIds: new Set(["104", "4", "1004"])
+            subOrgIds: new Set([organisationB.id, "104", "4", "1004"])
         }
         const orgC: Organisation = {
             ...organisationC,
-            subOrgIds: new Set(["1004", "104", "4"])
+            subOrgIds: new Set([organisationC.id, "1004", "104", "4"])
         }
 
         expect(getSubOrgs([orgA, orgB, orgC])).toEqual([])

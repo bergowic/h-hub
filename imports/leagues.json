@@ -3,186 +3,192 @@
         "_id": 1,
         "name": "M-RHL",
         "group": 83,
-        "score": 44371
+        "score": 68713
     },
     {
         "_id": 2,
         "name": "M-VL",
         "group": 83,
-        "score": 44366
+        "score": 68717
     },
     {
         "_id": 3,
         "name": "M-KL",
         "group": 83,
-        "score": 44361
+        "score": 68721
     },
     {
         "_id": 4,
         "name": "M-AK",
         "group": 83,
-        "score": 44356
+        "score": 68725
     },
     {
         "_id": 5,
         "name": "M-BL",
         "group": 83,
-        "score": 44351
+        "score": 68729
     },
     {
         "_id": 6,
         "name": "F-RHL",
         "group": 83,
-        "score": 44376
+        "score": 68733
     },
     {
         "_id": 7,
         "name": "F-KL",
         "group": 83,
-        "score": 44381
+        "score": 68737
     },
     {
         "_id": 8,
         "name": "F-AK",
         "group": 83,
-        "score": 44386
+        "score": 68741
     },
     {
         "_id": 9,
         "name": "mJA-RHL",
         "group": 83,
-        "score": 45641
+        "score": 70457
     },
     {
         "_id": 10,
         "name": "mJB-RHL",
         "group": 83,
-        "score": 45646
+        "score": 70465
     },
     {
         "_id": 11,
         "name": "mJB-KK",
         "group": 83,
-        "score": 45651
+        "score": 70469
     },
     {
         "_id": 12,
         "name": "mJC-RHL",
         "group": 83,
-        "score": 45656
+        "score": 70477
     },
     {
         "_id": 13,
-        "name": "mJC-KK-1",
+        "name": "mJC-KK",
         "group": 83,
-        "score": 45661
+        "score": 70453
     },
     {
         "_id": 14,
-        "name": "mJC-KK-2",
+        "name": "mJD-KK-1",
         "group": 83,
-        "score": 45666
+        "score": 70481
     },
     {
         "_id": 15,
-        "name": "mJD-KK-1",
+        "name": "mJD-Geo-2",
         "group": 83,
-        "score": 47861
+        "score": 70485
     },
     {
         "_id": 16,
-        "name": "mJD-KK-2",
+        "name": "mJD-Geo-3",
         "group": 83,
-        "score": 47866
+        "score": 70489
     },
     {
         "_id": 17,
-        "name": "mJD-KK-3",
+        "name": "wJA/B+/RHL",
         "group": 83,
-        "score": 47871
+        "score": 70445
     },
     {
         "_id": 18,
         "name": "wJB-RHL",
         "group": 83,
-        "score": 45686
+        "score": 70449
     },
     {
         "_id": 19,
         "name": "wJC-RHL",
         "group": 83,
-        "score": 45691
+        "score": 70493
     },
     {
         "_id": 20,
-        "name": "wJD-KK-1",
+        "name": "wJC-KK",
         "group": 83,
-        "score": 47456
+        "score": 70497
     },
     {
         "_id": 21,
-        "name": "wJD-KK-2",
+        "name": "wJD-Geo-1",
         "group": 83,
-        "score": 47461
+        "score": 70501
     },
     {
         "_id": 22,
-        "name": "M-OLRPS",
+        "name": "wJD-Geo-2",
         "group": 83,
-        "score": 44241
+        "score": 70505
     },
     {
         "_id": 23,
-        "name": "F-OLRPS",
+        "name": "wJE-Geo-1",
         "group": 83,
-        "score": 44246
+        "score": 70509
     },
     {
         "_id": 24,
-        "name": "mJA-OLRPS",
+        "name": "wJE-Geo-2",
         "group": 83,
-        "score": 44486
+        "score": 70513
     },
     {
         "_id": 25,
-        "name": "wJA-OLRPS",
+        "name": "M-OLRPS",
         "group": 83,
-        "score": 44491
+        "score": 69713
     },
     {
         "_id": 26,
-        "name": "mJB-OLRPS",
+        "name": "F-OLRPS",
         "group": 83,
-        "score": 44496
+        "score": 69717
     },
     {
         "_id": 27,
-        "name": "wJB-OLRPS",
+        "name": "mJA-OLRPS",
         "group": 83,
-        "score": 44501
+        "score": 70245
     },
     {
         "_id": 28,
-        "name": "mJC-OLRPS",
+        "name": "wJA-OLRPS",
         "group": 83,
-        "score": 44506
+        "score": 70257
     },
     {
         "_id": 29,
-        "name": "wJC-OLRPS",
+        "name": "mJB-OLRPS",
         "group": 83,
-        "score": 44511
+        "score": 70249
     },
     {
         "_id": 30,
-        "name": "mJC-WLT",
+        "name": "wJB-OLRPS",
         "group": 83,
-        "score": 54306
+        "score": 70261
     },
     {
         "_id": 31,
-        "name": "wJC-WLT",
+        "name": "mJC-OLRPS",
         "group": 83,
-        "score": 54311
+        "score": 70253
+    },
+    {
+        "_id": 32,
+        "name": "wJC-OLRPS",
+        "group": 83,
+        "score": 70269
     }
 ]

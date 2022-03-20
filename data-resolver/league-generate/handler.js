@@ -12,6 +12,7 @@ function unmarshallGames(games) {
 module.exports.generateLeague = (event, context, cb) => {
 	const league = JSON.parse(event.Records[0].body);
 
+	console.log('leagues', event.Records.length)
 	console.log('league', league);
 
 	const params = {

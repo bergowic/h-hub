@@ -3,5 +3,7 @@ role: LeagueGenerateRole
 events:
   - sqs:
       arn:
-        Fn::GetAtt: LeagueGenerateQueue.Arn
+        Fn::GetAtt:
+          - LeagueGenerateQueue
+          - Arn
       batchSize: 1

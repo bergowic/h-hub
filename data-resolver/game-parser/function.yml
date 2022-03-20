@@ -3,5 +3,7 @@ role: GameParserRole
 events:
   - sqs:
       arn:
-        Fn::GetAtt: GameParserQueue.Arn
+        Fn::GetAtt:
+          - GameParserQueue
+          - Arn
       batchSize: 1

@@ -10,6 +10,6 @@
     "pdf2json": "1.1.8",
     "request": "2.88.0",
     "sha1": "1.1.1",
-    "underscore": "1.9.1"
+    "underscore": "^1.13.2"
   }
 }

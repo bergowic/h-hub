@@ -7,11 +7,11 @@ const { sendMessage } = require('./queue')
 const sendGame = async (queueUrl, league, game) => {
 	const oldGame = await getGame(game._id)
 
+	console.log('try sendGame', game, oldGame)
+
 	if (oldGame && oldGame.results) {
 		return
 	}
-
-	console.log('game', game, oldGame)
 
 	const body = {
 		league: league,

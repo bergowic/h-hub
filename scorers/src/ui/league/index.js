@@ -54,7 +54,15 @@ function mergeGoalsOfGames(games) {
 	const teams = {}
 
 	games
-		.sort((g1, g2) => g1.time.localeCompare(g2.time))
+		.sort((g1, g2) => {
+			if (g1.time && g2.time) {
+				return g1.time.localeCompare(g2.time)
+			} else if (g1.time) {
+				return -1
+			} else {
+				return 1
+			}
+		})
 		.forEach(game => {
 			if (game.results) {
 				mergeGoalsOfTeam(teams, game, 'home');

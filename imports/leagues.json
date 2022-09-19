@@ -1,194 +1,176 @@
 [
-    {
-        "_id": 1,
-        "name": "M-RHL",
-        "group": 83,
-        "score": 68713
-    },
-    {
-        "_id": 2,
-        "name": "M-VL",
-        "group": 83,
-        "score": 68717
-    },
-    {
-        "_id": 3,
-        "name": "M-KL",
-        "group": 83,
-        "score": 68721
-    },
-    {
-        "_id": 4,
-        "name": "M-AK",
-        "group": 83,
-        "score": 68725
-    },
-    {
-        "_id": 5,
-        "name": "M-BL",
-        "group": 83,
-        "score": 68729
-    },
-    {
-        "_id": 6,
-        "name": "F-RHL",
-        "group": 83,
-        "score": 68733
-    },
-    {
-        "_id": 7,
-        "name": "F-KL",
-        "group": 83,
-        "score": 68737
-    },
-    {
-        "_id": 8,
-        "name": "F-AK",
-        "group": 83,
-        "score": 68741
-    },
-    {
-        "_id": 9,
-        "name": "mJA-RHL",
-        "group": 83,
-        "score": 70457
-    },
-    {
-        "_id": 10,
-        "name": "mJB-RHL",
-        "group": 83,
-        "score": 70465
-    },
-    {
-        "_id": 11,
-        "name": "mJB-KK",
-        "group": 83,
-        "score": 70469
-    },
-    {
-        "_id": 12,
-        "name": "mJC-RHL",
-        "group": 83,
-        "score": 70477
-    },
-    {
-        "_id": 13,
-        "name": "mJC-KK",
-        "group": 83,
-        "score": 70453
-    },
-    {
-        "_id": 14,
-        "name": "mJD-KK-1",
-        "group": 83,
-        "score": 70481
-    },
-    {
-        "_id": 15,
-        "name": "mJD-Geo-2",
-        "group": 83,
-        "score": 70485
-    },
-    {
-        "_id": 16,
-        "name": "mJD-Geo-3",
-        "group": 83,
-        "score": 70489
-    },
-    {
-        "_id": 17,
-        "name": "wJA/B+/RHL",
-        "group": 83,
-        "score": 70445
-    },
-    {
-        "_id": 18,
-        "name": "wJB-RHL",
-        "group": 83,
-        "score": 70449
-    },
-    {
-        "_id": 19,
-        "name": "wJC-RHL",
-        "group": 83,
-        "score": 70493
-    },
-    {
-        "_id": 20,
-        "name": "wJC-KK",
-        "group": 83,
-        "score": 70497
-    },
-    {
-        "_id": 21,
-        "name": "wJD-Geo-1",
-        "group": 83,
-        "score": 70501
-    },
-    {
-        "_id": 22,
-        "name": "wJD-Geo-2",
-        "group": 83,
-        "score": 70505
-    },
-    {
-        "_id": 23,
-        "name": "wJE-Geo-1",
-        "group": 83,
-        "score": 70509
-    },
-    {
-        "_id": 24,
-        "name": "wJE-Geo-2",
-        "group": 83,
-        "score": 70513
-    },
-    {
-        "_id": 25,
-        "name": "M-OLRPS",
-        "group": 83,
-        "score": 69713
-    },
-    {
-        "_id": 26,
-        "name": "F-OLRPS",
-        "group": 83,
-        "score": 69717
-    },
-    {
-        "_id": 27,
-        "name": "mJA-OLRPS",
-        "group": 83,
-        "score": 70245
-    },
-    {
-        "_id": 28,
-        "name": "wJA-OLRPS",
-        "group": 83,
-        "score": 70257
-    },
-    {
-        "_id": 29,
-        "name": "mJB-OLRPS",
-        "group": 83,
-        "score": 70249
-    },
-    {
-        "_id": 30,
-        "name": "wJB-OLRPS",
-        "group": 83,
-        "score": 70261
-    },
-    {
-        "_id": 31,
-        "name": "mJC-OLRPS",
-        "group": 83,
-        "score": 70253
-    },
-    {
-        "_id": 32,
-        "name": "wJC-OLRPS",
-        "group": 83,
-        "score": 70269
-    }
+  {
+    "_id": 221,
+    "name": "M-RHL",
+    "group": 83,
+    "score": 86271
+  },
+  {
+    "_id": 222,
+    "name": "M-VL",
+    "group": 83,
+    "score": 87961
+  },
+  {
+    "_id": 223,
+    "name": "M-KL",
+    "group": 83,
+    "score": 87971
+  },
+  {
+    "_id": 224,
+    "name": "M-AK",
+    "group": 83,
+    "score": 89141
+  },
+  {
+    "_id": 225,
+    "name": "M-BK",
+    "group": 83,
+    "score": 89146
+  },
+  {
+    "_id": 226,
+    "name": "F-RHL",
+    "group": 83,
+    "score": 87936
+  },
+  {
+    "_id": 227,
+    "name": "F-KL",
+    "group": 83,
+    "score": 87941
+  },
+  {
+    "_id": 228,
+    "name": "F-AK",
+    "group": 83,
+    "score": 87946
+  },
+  {
+    "_id": 229,
+    "name": "mJA-RHL",
+    "group": 83,
+    "score": 87566
+  },
+  {
+    "_id": 2210,
+    "name": "mJB-RHL",
+    "group": 83,
+    "score": 87571
+  },
+  {
+    "_id": 2212,
+    "name": "mJC-RHL",
+    "group": 83,
+    "score": 87576
+  },
+  {
+    "_id": 2213,
+    "name": "mJC-KK",
+    "group": 83,
+    "score": 87581
+  },
+  {
+    "_id": 2214,
+    "name": "mJD-KK-1",
+    "group": 83,
+    "score": 87586
+  },
+  {
+    "_id": 2215,
+    "name": "mJD-KK-2",
+    "group": 83,
+    "score": 87596
+  },
+  {
+    "_id": 2216,
+    "name": "mJD-KK-3",
+    "group": 83,
+    "score": 87601
+  },
+  {
+    "_id": 2218,
+    "name": "wJB-RHL",
+    "group": 83,
+    "score": 87736
+  },
+  {
+    "_id": 2219,
+    "name": "wJC-RHL",
+    "group": 83,
+    "score": 87741
+  },
+  {
+    "_id": 2220,
+    "name": "wJC-KK",
+    "group": 83,
+    "score": 87581
+  },
+  {
+    "_id": 2221,
+    "name": "wJD-KK-1",
+    "group": 83,
+    "score": 87746
+  },
+  {
+    "_id": 2222,
+    "name": "wJD-KK-2",
+    "group": 83,
+    "score": 87751
+  },
+  {
+    "_id": 2225,
+    "name": "M-OLRPS",
+    "group": 83,
+    "score": 86366
+  },
+  {
+    "_id": 2226,
+    "name": "F-OLRPS",
+    "group": 83,
+    "score": 86371
+  },
+  {
+    "_id": 2227,
+    "name": "mJA-OLRPS",
+    "group": 83,
+    "score": 86376
+  },
+  {
+    "_id": 2228,
+    "name": "wJA-OLRPS",
+    "group": 83,
+    "score": 70257
+  },
+  {
+    "_id": 2229,
+    "name": "mJB-OLRPS",
+    "group": 83,
+    "score": 86386
+  },
+  {
+    "_id": 2230,
+    "name": "mJC-OLRPS",
+    "group": 83,
+    "score": 86396
+  },
+  {
+    "_id": 2231,
+    "name": "wJA-OLRPS",
+    "group": 83,
+    "score": 86381
+  },
+  {
+    "_id": 2232,
+    "name": "wJB-OLRPS",
+    "group": 83,
+    "score": 86391
+  },
+  {
+    "_id": 2233,
+    "name": "wJC-OLRPS",
+    "group": 83,
+    "score": 86401
+  }
 ]

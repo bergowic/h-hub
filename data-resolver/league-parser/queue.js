@@ -1,8 +1,8 @@
 'use strict'
 
-const AWS = require('aws-sdk')
+const { SQS } = require("@aws-sdk/client-sqs");
 
-const sqs = new AWS.SQS()
+const sqs = new SQS()
 
 module.exports.sendMessage = (queueUrl, body) => {
   const params = {
@@ -10,5 +10,5 @@ module.exports.sendMessage = (queueUrl, body) => {
 		QueueUrl: queueUrl,
 	}
 
-	return sqs.sendMessage(params).promise()
+	return sqs.sendMessage(params)
 }

@@ -1,16 +1,9 @@
 'use strict'
 
-const AWS = require('aws-sdk')
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
 
-const dynamoDb = new AWS.DynamoDB()
-
-const marshall = (arg) => {
-  return AWS.DynamoDB.Converter.marshall(arg)
-}
-
-const unmarshall = (arg) => {
-  return AWS.DynamoDB.Converter.unmarshall(arg)
-}
+const dynamodb = new DynamoDB()
 
 module.exports.getGame = async (id) => {
   const key = {
@@ -21,7 +14,7 @@ module.exports.getGame = async (id) => {
 		TableName: process.env.TABLE_NAME,
 	}
 
-  const result = await dynamoDb.getItem(params).promise()
+  const result = await dynamodb.getItem(params)
 
   return unmarshall(result.Item)
 }

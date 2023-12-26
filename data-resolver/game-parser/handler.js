@@ -1,11 +1,13 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+const { marshall } = require("@aws-sdk/util-dynamodb");
 const request = require('request');
 const PDFParser = require('pdf2json');
 const gameParser = require('./parser');
 
-const dynamoDb = new AWS.DynamoDB();
+const dynamoDb = new DynamoDB();
 
 function getGameResults(url) {
 	return new Promise((success, fail) => {
@@ -47,7 +49,7 @@ module.exports.parseGame = (event, context, cb) => {
 		console.log('results', JSON.stringify(game));
 
 		const params = {
-			Item: AWS.DynamoDB.Converter.marshall(game),
+			Item: marshall(game),
 			TableName: process.env.TABLE_NAME
 		}
 

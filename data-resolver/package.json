@@ -5,7 +5,6 @@
   "author": "Lukas Berg",
   "license": "MIT",
   "dependencies": {
-    "got": "^14.0.0",
     "moment-timezone": "^0.5.43",
     "pdf2json": "1.1.8",
     "request": "2.88.0",

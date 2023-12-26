@@ -38,11 +38,9 @@ const getLeagueUrl = (league) => {
 }
 
 module.exports.getGames = async (league) => {
-  const got = await import('got')
+  const response = await fetch(getLeagueUrl(league))
 
-  const response = await got(getLeagueUrl(league))
-
-  return JSON.parse(response.body)[0]
+  return JSON.parse(response.json())[0]
     .content
     .futureGames
     .games

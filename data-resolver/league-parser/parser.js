@@ -1,6 +1,5 @@
 'use strict'
 
-const got = require('got')
 const moment = require('moment-timezone')
 const sha1 = require('sha1')
 const util = require('util')
@@ -39,6 +38,8 @@ const getLeagueUrl = (league) => {
 }
 
 module.exports.getGames = async (league) => {
+  const got = await import('got')
+
   const response = await got(getLeagueUrl(league))
 
   return JSON.parse(response.body)[0]

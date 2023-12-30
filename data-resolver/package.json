@@ -5,11 +5,24 @@
   "author": "Lukas Berg",
   "license": "MIT",
   "dependencies": {
-    "got": "10.5.5",
-    "moment-timezone": "0.5.27",
-    "pdf2json": "1.1.8",
+    "moment-timezone": "^0.5.43",
+    "pdf2json": "^3.0.5",
     "request": "2.88.0",
     "sha1": "1.1.1",
-    "underscore": "^1.13.2"
+    "underscore": "^1.13.6"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-dynamodb": "^3.478.0",
+    "@aws-sdk/client-s3": "^3.478.0",
+    "@aws-sdk/client-sqs": "^3.478.0",
+    "@aws-sdk/util-dynamodb": "^3.478.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/request": "^2.48.12",
+    "@types/underscore": "^1.11.15",
+    "serverless-plugin-typescript": "^2.1.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }

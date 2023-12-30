@@ -1,12 +1,14 @@
 'use strict';
 
-const AWS = require('aws-sdk');
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
+const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
+const { S3 } = require('@aws-sdk/client-s3');
 
-const dynamoDb = new AWS.DynamoDB();
-const s3 = new AWS.S3();
+const dynamoDb = new DynamoDB();
+const s3 = new S3();
 
 function unmarshallGames(games) {
-	return games.map((game) => AWS.DynamoDB.Converter.unmarshall(game));
+	return games.map((game) => unmarshall(game));
 }
 
 module.exports.generateLeague = (event, context, cb) => {
@@ -17,7 +19,7 @@ module.exports.generateLeague = (event, context, cb) => {
 
 	const params = {
 		TableName: process.env.TABLE_NAME,
-		ExpressionAttributeValues: AWS.DynamoDB.Converter.marshall({
+		ExpressionAttributeValues: marshall({
 			':leagueId': league._id
 		}),
 		FilterExpression: 'leagueId = :leagueId',

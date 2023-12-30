@@ -1,9 +1,9 @@
 'use strict';
 
 const leagues = require('./leagues.json');
-const AWS = require('aws-sdk');
+const sqs = require('@aws-sdk/client-sqs');
 
-const sqs = new AWS.SQS();
+const SQS = new sqs.SQS();
 
 exports.default = (event, context, cb) => {
 	const accountId = context.invokedFunctionArn.split(":")[4];
@@ -17,7 +17,7 @@ exports.default = (event, context, cb) => {
         QueueUrl: queueUrl
     };
 
-		return sqs.sendMessage(params).promise();
+		return SQS.sendMessage(params);
 	})).then(() => {
 		cb();
 	}, cb);

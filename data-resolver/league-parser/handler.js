@@ -5,9 +5,10 @@ const { getGame } = require('./storage')
 const { sendMessage } = require('./queue')
 
 const sendGame = async (queueUrl, league, game) => {
+	console.log('sendGame', game)
 	const oldGame = await getGame(game._id)
 
-	console.log('try sendGame', game, oldGame)
+	console.log('oldGame', oldGame)
 
 	if (oldGame && oldGame.results) {
 		return

@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - update-versions
 
 jobs:
   build:

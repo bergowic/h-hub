@@ -42,3 +42,6 @@ resources:
     LeagueGenerateTriggerRole: ${file(league-generate-trigger/role.yml)}
     LeagueParserRole: ${file(league-parser/role.yml)}
     LeagueParserTriggerRole: ${file(league-parser-trigger/role.yml)}
+
+plugins:
+  - serverless-plugin-typescript

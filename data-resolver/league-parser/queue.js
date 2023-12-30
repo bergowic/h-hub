@@ -4,7 +4,7 @@ const { SQS } = require("@aws-sdk/client-sqs");
 
 const sqs = new SQS()
 
-module.exports.sendMessage = (queueUrl, body) => {
+module.exports.sendMessage = async (queueUrl, body) => {
   const params = {
 		MessageBody: JSON.stringify(body),
 		QueueUrl: queueUrl,

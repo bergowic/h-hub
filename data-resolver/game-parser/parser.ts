@@ -11,6 +11,9 @@ const X_POS = Object.freeze({
   "7M": 19.999,
   TEAM_NAME: 3.471,
   META: 3.293,
+  YELLOW_CARD: 21.635,
+  TIME_PENALTY: [23.495, 25.267, 27.039],
+  RED_CARD: 28.81,
 })
 
 function getTeamName(texts: Text[]) {
@@ -22,12 +25,18 @@ function getTeamName(texts: Text[]) {
   return t.substr(t.indexOf(":") + 2)
 }
 
-function getPlayerName(texts: Text[]) {
-  var text = _.find(texts, isPlayerNameIndex)
+const getPlayerName = (texts: Text[]) => {
+  const text = _.find(texts, isPlayerNameIndex)
   if (text === undefined) {
     return "unknown"
   }
-  return decodeURI(text.R[0].T)
+  const rawName = decodeURI(text.R[0].T)
+  const numberChangeIndex = rawName.indexOf("(")
+  if (numberChangeIndex >= 0) {
+    return rawName.substring(0, numberChangeIndex).trim()
+  }
+
+  return rawName
 }
 
 function getGoals(texts: Text[]) {
@@ -54,12 +63,31 @@ function getAttempts7m(texts: Text[]) {
   return 0
 }
 
+function hasYellowCard(texts: Text[]) {
+  var text = _.find(texts, isYellowCardIndex)
+  return Boolean(text)
+}
+
+function hasRedCard(texts: Text[]) {
+  var text = _.find(texts, isRedCardIndex)
+  return Boolean(text)
+}
+
+function getTimePenalties(texts: Text[]) {
+  var texts = _.filter(texts, isTimePenaltyIndex)
+  return texts.length
+}
+
 const getPlayer = (texts: Text[]): Player => {
-  var name = getPlayerName(texts)
-  var goals = getGoals(texts)
-  var goals7m = getGoals7m(texts)
-  var attempts7m = getAttempts7m(texts)
-  return { name, goals, goals7m, attempts7m }
+  return {
+    name: getPlayerName(texts),
+    goals: getGoals(texts),
+    goals7m: getGoals7m(texts),
+    attempts7m: getAttempts7m(texts),
+    yellowCard: hasYellowCard(texts),
+    redCard: hasRedCard(texts),
+    timePenalties: getTimePenalties(texts),
+  }
 }
 
 const getTeam = (texts: Text[]): Team => {
@@ -113,6 +141,18 @@ function isMetaIndex(text: Text) {
   return text.x == X_POS.META
 }
 
+function isYellowCardIndex(text: Text) {
+  return text.x == X_POS.YELLOW_CARD
+}
+
+function isRedCardIndex(text: Text) {
+  return text.x == X_POS.RED_CARD
+}
+
+function isTimePenaltyIndex(text: Text) {
+  return X_POS.TIME_PENALTY.indexOf(text.x) >= 0
+}
+
 const getHome = (texts: Text[]): Team => {
   var start = _.findIndex(texts, isTeamIndex) + 1
   var end = _.findLastIndex(texts, isTeamIndex)
@@ -125,7 +165,7 @@ const getGuest = (texts: Text[]): Team => {
   return getTeam(texts.slice(start, end))
 }
 
-export const getGame = (pdf: Output): Game => {
+export const parseGame = (pdf: Output): Game => {
   var page = pdf.Pages[1]
   var home = getHome(page.Texts)
   var guest = getGuest(page.Texts)

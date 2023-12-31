@@ -10,9 +10,9 @@ const sendGame = async (queueUrl, league, game) => {
 
 	console.log('game', game, oldGame)
 
-	if (oldGame && oldGame.results) {
-		return
-	}
+	// if (oldGame && oldGame.results) {
+	// 	return
+	// }
 
 	const body = {
 		league: league,

@@ -1,6 +1,6 @@
 import { DynamoDB } from "@aws-sdk/client-dynamodb"
 import { marshall } from "@aws-sdk/util-dynamodb"
-import { getGame } from "./parser"
+import { parseGame } from "./parser"
 import { getPdfFromUrl } from "./pdf-loader"
 
 const dynamoDb = new DynamoDB()
@@ -14,7 +14,7 @@ module.exports.parseGame = async (event, context) => {
   console.log("game", game)
 
   const pdf = await getPdfFromUrl(game.report.url)
-  const gameData = getGame(pdf)
+  const gameData = parseGame(pdf)
 
   game.results = {
     home: {

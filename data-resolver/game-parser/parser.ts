@@ -25,12 +25,18 @@ function getTeamName(texts: Text[]) {
   return t.substr(t.indexOf(":") + 2)
 }
 
-function getPlayerName(texts: Text[]) {
-  var text = _.find(texts, isPlayerNameIndex)
+const getPlayerName = (texts: Text[]) => {
+  const text = _.find(texts, isPlayerNameIndex)
   if (text === undefined) {
     return "unknown"
   }
-  return decodeURI(text.R[0].T)
+  const rawName = decodeURI(text.R[0].T)
+  const numberChangeIndex = rawName.indexOf("(")
+  if (numberChangeIndex >= 0) {
+    return rawName.substring(0, numberChangeIndex).trim()
+  }
+
+  return rawName
 }
 
 function getGoals(texts: Text[]) {

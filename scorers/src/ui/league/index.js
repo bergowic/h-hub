@@ -19,6 +19,9 @@ function mergeGoalsOfPlayer(teamState, game, player) {
 			games: 0,
 			gameHistory: {},
 			teamGames: teamState.games,
+			yellowCards: 0,
+			redCards: 0,
+			timePenalties: 0,
 		};
 	}
 
@@ -33,8 +36,14 @@ function mergeGoalsOfPlayer(teamState, game, player) {
 		goals7m: player.goals7m,
 		attempts7m: player.attempts7m,
 		quote7m: calcQuote(player.goals7m, player.attempts7m),
+		timePenalties: player.timePenalties,
+		yellowCard: player.yellowCard,
+		redCard: player.redCard,
 		game: game,
 	};
+	playerState.yellowCards += player.yellowCard ? 1 : 0;
+	playerState.redCards += player.redCard ? 1 : 0;
+	playerState.timePenalties += player.timePenalties;
 }
 
 function mergeGoalsOfTeam(state, game, team) {
@@ -229,6 +238,7 @@ class League extends React.Component {
 									<td>{player.goals7m}</td>
 									<td>{player.attempts7m}</td>
 									<td>{player.quote7m < 0 ? '-' : player.quote7m + '%'}</td>
+									<td>{player.timePenalties}</td>
 									<td>{player.team}</td>
 								</tr>
 							)

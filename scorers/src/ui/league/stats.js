@@ -7,6 +7,7 @@
     {name: '7m - Tore', value: 'goals7m'},
     {name: '7m - Versuche', value: 'attempts7m'},
     {name: '7m - Quote', value: 'quote7m', percent: true},
+    {name: 'Zeitstrafen', value: 'timePenalties'},
 ];
 
 const historyStats = [
@@ -15,6 +16,7 @@ const historyStats = [
     {name: '7m - Tore', value: 'goals7m'},
     {name: '7m - Versuche', value: 'attempts7m'},
     {name: '7m - Quote', value: 'quote7m', percent: true},
+    {name: 'Zeitstrafen', value: 'timePenalties'},
 ];
 
 export {

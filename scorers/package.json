@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "bootstrap": "4.3.1",
-    "react": "16.11.0",
-    "react-bootstrap": "1.0.0-beta.14",
-    "react-dom": "16.11.0",
-    "react-router-dom": "5.1.2",
-    "react-scripts": "3.2.0",
-    "underscore": "^1.13.2"
+    "bootstrap": "^4.6.2",
+    "react": "^18.2.0",
+    "react-bootstrap": "^1.6.8",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
+    "underscore": "^1.13.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +31,9 @@
     ]
   },
   "author": "Lukas Berg",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "react-scripts": "^5.0.1"
+  }
 }

@@ -2,20 +2,18 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-import {
-	useHistory,
-} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import _ from 'underscore';
 
 export function BackButton({ onClick }) {
-    let history = useHistory()
+    let navigate = useNavigate()
     
     function _onClick() {
         if (_.isFunction(onClick)) {
             onClick();
         } else {
-            history.goBack()
+            navigate(-1)
         }
     }
 

@@ -2,9 +2,7 @@ import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 
-import {
-	useHistory,
-} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import leagues from 'imports/leagues.json';
 
@@ -22,7 +20,7 @@ function renderLeagueOption(league) {
 }
 
 function LeagueSelect() {
-	const history = useHistory();
+	const navigate = useNavigate();
 	const query = useQuery();
 
 	let leagueId = query.get('leagueId');
@@ -34,7 +32,7 @@ function LeagueSelect() {
 	}
 
 	function onSelectLeague(e) {
-		history.push('/?page=league&leagueId=' + e.target.value);
+		navigate('/?page=league&leagueId=' + e.target.value);
 	}
 
 	return (

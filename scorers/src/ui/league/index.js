@@ -43,7 +43,7 @@ function mergeGoalsOfPlayer(teamState, game, player) {
 	};
 	playerState.yellowCards += player.yellowCard ? 1 : 0;
 	playerState.redCards += player.redCard ? 1 : 0;
-	playerState.timePenalties += player.timePenalties;
+	playerState.timePenalties += player.timePenalties || 0;
 }
 
 function mergeGoalsOfTeam(state, game, team) {

@@ -1,182 +1,134 @@
 [
   {
-    "_id": 231,
-    "name": "M-RHL",
+    "_id": 241,
+    "name": "M-OL",
     "group": 83,
-    "score": 107676
+    "score": 122376
   },
   {
-    "_id": 232,
+    "_id": 242,
     "name": "M-VL",
     "group": 83,
-    "score": 107681
+    "score": 122381
   },
   {
-    "_id": 233,
-    "name": "M-KL",
+    "_id": 243,
+    "name": "M-BOL",
     "group": 83,
-    "score": 107686
+    "score": 122966
   },
   {
-    "_id": 234,
-    "name": "M-AK",
+    "_id": 244,
+    "name": "M-BL",
     "group": 83,
-    "score": 107691
+    "score": 122971
   },
   {
-    "_id": 235,
-    "name": "M-BK",
+    "_id": 245,
+    "name": "F-OL",
     "group": 83,
-    "score": 107696
+    "score": 123181
   },
   {
-    "_id": 236,
-    "name": "F-RHL",
+    "_id": 246,
+    "name": "F-BOL",
     "group": 83,
-    "score": 107701
+    "score": 123186
   },
   {
-    "_id": 237,
-    "name": "F-KL1",
+    "_id": 247,
+    "name": "mJA-OL",
     "group": 83,
-    "score": 107706
+    "score": 122976
   },
   {
-    "_id": 238,
-    "name": "F-KL2",
+    "_id": 248,
+    "name": "mJB-OL",
     "group": 83,
-    "score": 107711
+    "score": 122981
   },
   {
-    "_id": 239,
-    "name": "F-KL3",
+    "_id": 249,
+    "name": "mJB-VL",
     "group": 83,
-    "score": 107716
+    "score": 122986
   },
   {
-    "_id": 2310,
-    "name": "mJA-RHL",
+    "_id": 2410,
+    "name": "mJC-OL",
     "group": 83,
-    "score": 107781
+    "score": 123191
   },
   {
-    "_id": 2311,
-    "name": "mJB-RHL",
+    "_id": 2411,
+    "name": "mJC-VL O",
     "group": 83,
-    "score": 107786
+    "score": 123196
   },
   {
-    "_id": 2312,
-    "name": "mJB-KK",
+    "_id": 2412,
+    "name": "mJC-VL W",
     "group": 83,
-    "score": 107791
+    "score": 123201
   },
   {
-    "_id": 2313,
-    "name": "mJC-RHL",
+    "_id": 2413,
+    "name": "mJD-OL",
     "group": 83,
-    "score": 107796
+    "score": 123206
   },
   {
-    "_id": 2314,
-    "name": "mJC-KK",
+    "_id": 2414,
+    "name": "mJD-VL O",
     "group": 83,
-    "score": 107966
+    "score": 123211
   },
   {
-    "_id": 2315,
-    "name": "mJD-KK-1",
+    "_id": 2415,
+    "name": "mJD-VL W",
     "group": 83,
-    "score": 107806
+    "score": 123216
   },
   {
-    "_id": 2316,
-    "name": "mJD-KK-2",
-    "group": 83,
-    "score": 107811
+    "_id": 2416,
+    "name": "M-RL-RPS",
+    "group": 79,
+    "score": 120521
   },
   {
-    "_id": 2317,
-    "name": "mJD-KK-3",
-    "group": 83,
-    "score": 107816
+    "_id": 2417,
+    "name": "F-RL-RPS",
+    "group": 79,
+    "score": 120526
   },
   {
-    "_id": 2318,
-    "name": "wJB-RHL",
-    "group": 83,
-    "score": 107896
+    "_id": 2418,
+    "name": "mJA-RLRPS",
+    "group": 79,
+    "score": 120531
   },
   {
-    "_id": 2319,
-    "name": "wJC-RHL",
-    "group": 83,
-    "score": 107901
+    "_id": 2419,
+    "name": "mJB-RLRPS",
+    "group": 79,
+    "score": 120536
   },
   {
-    "_id": 2320,
-    "name": "wJD-KK-1",
-    "group": 83,
-    "score": 107906
+    "_id": 2420,
+    "name": "wJA-RLRPS",
+    "group": 79,
+    "score": 120546
   },
   {
-    "_id": 2321,
-    "name": "wJD-KK-2",
-    "group": 83,
-    "score": 107911
+    "_id": 2421,
+    "name": "wJB-RLRPS",
+    "group": 79,
+    "score": 120551
   },
   {
-    "_id": 2322,
-    "name": "wJD-KK-3",
-    "group": 83,
-    "score": 107916
-  },
-  {
-    "_id": 2323,
-    "name": "M-OLRPS",
-    "group": 83,
-    "score": 103036
-  },
-  {
-    "_id": 2324,
-    "name": "F-OLRPS",
-    "group": 83,
-    "score": 103041
-  },
-  {
-    "_id": 2325,
-    "name": "mJA-OLRPS",
-    "group": 83,
-    "score": 104531
-  },
-  {
-    "_id": 2326,
-    "name": "mJB-OLRPS",
-    "group": 83,
-    "score": 104536
-  },
-  {
-    "_id": 2327,
-    "name": "mJC-OLRPS",
-    "group": 83,
-    "score": 104541
-  },
-  {
-    "_id": 2328,
-    "name": "wJA-OLRPS",
-    "group": 83,
-    "score": 104546
-  },
-  {
-    "_id": 2329,
-    "name": "wJB-OLRPS",
-    "group": 83,
-    "score": 104551
-  },
-  {
-    "_id": 2330,
-    "name": "wJC-OLRPS",
-    "group": 83,
-    "score": 104556
+    "_id": 2422,
+    "name": "wJC-RLRPS",
+    "group": 79,
+    "score": 120556
   }
 ]

@@ -90,6 +90,42 @@
     "score": 123216
   },
   {
+    "_id": 2423,
+    "name": "wJA-OL N",
+    "group": 83,
+    "score": 123221
+  },
+  {
+    "_id": 2424,
+    "name": "wJB-OL N",
+    "group": 83,
+    "score": 124366
+  },
+  {
+    "_id": 2425,
+    "name": "wJC-OL",
+    "group": 83,
+    "score": 124371
+  },
+  {
+    "_id": 2426,
+    "name": "wJC-VL",
+    "group": 83,
+    "score": 124376
+  },
+  {
+    "_id": 2427,
+    "name": "wJD-VL Ost",
+    "group": 83,
+    "score": 124381
+  },
+  {
+    "_id": 2428,
+    "name": "wJD-VL WE",
+    "group": 83,
+    "score": 124386
+  },
+  {
     "_id": 2416,
     "name": "M-RL-RPS",
     "group": 79,

@@ -5,15 +5,15 @@ import { Game, Player, Team } from "./model"
 import _ from "underscore"
 
 const X_POS = Object.freeze({
-  NUMBER: [3.601, 3.7569999999999997],
+  NUMBER: [3.601, 3.7569999999999997, 3.592, 3.753],
   PLAYER_NAME: 4.711,
-  GOALS: [18.284, 18.128],
-  "7M": 19.999,
+  GOALS: [18.284, 18.128, 18.28, 18.119],
+  "7M": [19.999, 19.983],
   TEAM_NAME: 3.471,
   META: 3.293,
-  YELLOW_CARD: 21.635,
-  TIME_PENALTY: [23.495, 25.267, 27.039],
-  RED_CARD: 28.81,
+  YELLOW_CARD: [21.635, 21.618],
+  TIME_PENALTY: [23.495, 25.267, 27.039, 23.47, 25.242, 27.013],
+  RED_CARD: [28.81, 28.785],
 })
 
 function getTeamName(texts: Text[]) {
@@ -91,7 +91,7 @@ const getPlayer = (texts: Text[]): Player => {
 }
 
 const getTeam = (texts: Text[]): Team => {
-  var indices = texts
+    var indices = texts
     .map(function (text, index) {
       return {
         start: isNumberIndex(text),
@@ -126,7 +126,7 @@ function isGoalsIndex(text: Text) {
 }
 
 function is7mIndex(text: Text) {
-  return text.x == X_POS["7M"]
+  return X_POS["7M"]
 }
 
 function isNumberIndex(text: Text) {
@@ -142,11 +142,11 @@ function isMetaIndex(text: Text) {
 }
 
 function isYellowCardIndex(text: Text) {
-  return text.x == X_POS.YELLOW_CARD
+  return X_POS.YELLOW_CARD.indexOf(text.x) >= 0
 }
 
 function isRedCardIndex(text: Text) {
-  return text.x == X_POS.RED_CARD
+  return X_POS.RED_CARD.indexOf(text.x) >= 0
 }
 
 function isTimePenaltyIndex(text: Text) {

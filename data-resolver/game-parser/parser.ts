@@ -126,7 +126,7 @@ function isGoalsIndex(text: Text) {
 }
 
 function is7mIndex(text: Text) {
-  return X_POS["7M"]
+  return X_POS["7M"].indexOf(text.x) >= 0
 }
 
 function isNumberIndex(text: Text) {

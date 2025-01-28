@@ -23,7 +23,7 @@ const getGame = (leagueId, rawGame) => {
     },
   }
 
-  if (rawGame.sGID) {
+  if (rawGame.sGID && (rawGame.gHomePoints.trim() || rawGame.gGuestPoints.trim())) {
     game.report = {
       _id: parseInt(rawGame.sGID, 10),
       url: REPORT_URL_BASE + rawGame.sGID,
